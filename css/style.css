@@ -1,0 +1,480 @@
+/* ================================
+   CONFIGURAÇÕES GERAIS
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f5f5;
+    color: #111;
+}
+
+
+/* ================================
+   CABEÇALHO
+================================ */
+
+header {
+    width: 100%;
+    height: 80px;
+
+    background: #111;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.25);
+}
+
+
+/* LOGO */
+
+.logo h1 {
+    color: white;
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+
+/* MENU */
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #d4af37;
+}
+
+
+/* AÇÕES */
+
+.acoes {
+    display: flex;
+    gap: 10px;
+}
+
+.acoes button {
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #222;
+    color: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.acoes button:hover {
+    background: #d4af37;
+    color: #111;
+    transform: translateY(-2px);
+}
+
+
+/* ================================
+   BANNER
+================================ */
+
+.banner {
+    min-height: 520px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 70px 8%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #111 0%,
+            #222 55%,
+            #444 100%
+        );
+
+    color: white;
+}
+
+
+.banner-texto {
+    max-width: 600px;
+}
+
+.banner-texto p {
+    color: #d4af37;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 15px;
+}
+
+.banner-texto h2 {
+    font-size: 60px;
+    line-height: 1.05;
+
+    margin-bottom: 20px;
+}
+
+.banner-texto span {
+    display: block;
+
+    max-width: 500px;
+
+    color: #ddd;
+
+    font-size: 17px;
+    line-height: 1.6;
+
+    margin-bottom: 30px;
+}
+
+
+/* BOTÃO */
+
+.botao {
+    display: inline-block;
+
+    background: #d4af37;
+    color: #111;
+
+    text-decoration: none;
+
+    padding: 15px 30px;
+
+    border-radius: 5px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.botao:hover {
+    background: white;
+
+    transform: translateY(-3px);
+}
+
+
+/* ================================
+   CATEGORIAS
+================================ */
+
+.categorias {
+    padding: 70px 8%;
+
+    text-align: center;
+
+    background: white;
+}
+
+.categorias > h2 {
+    font-size: 32px;
+
+    margin-bottom: 40px;
+}
+
+
+.categorias-container {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+.categoria {
+    background: #f5f5f5;
+
+    padding: 40px 25px;
+
+    border-radius: 10px;
+
+    transition: 0.3s;
+
+    cursor: pointer;
+}
+
+.categoria:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+
+.categoria span {
+    font-size: 45px;
+
+    display: block;
+
+    margin-bottom: 15px;
+}
+
+
+.categoria h3 {
+    font-size: 22px;
+
+    margin-bottom: 10px;
+}
+
+
+.categoria p {
+    color: #666;
+}
+
+
+/* ================================
+   PRODUTOS
+================================ */
+
+.produtos {
+    padding: 80px 8%;
+}
+
+.produtos > h2 {
+    text-align: center;
+
+    font-size: 32px;
+
+    margin-bottom: 45px;
+}
+
+
+.produtos-container {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 25px;
+}
+
+
+/* CARD DO PRODUTO */
+
+.produto {
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 15px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+    transition: 0.3s;
+}
+
+.produto:hover {
+    transform: translateY(-7px);
+
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+/* IMAGEM */
+
+.produto-imagem {
+    height: 230px;
+
+    background: #eee;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-size: 80px;
+
+    margin-bottom: 20px;
+}
+
+
+/* NOME */
+
+.produto h3 {
+    font-size: 18px;
+
+    margin-bottom: 10px;
+}
+
+
+/* PREÇO */
+
+.preco {
+    color: #111;
+
+    font-size: 21px;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+
+/* BOTÃO COMPRAR */
+
+.comprar {
+    width: 100%;
+
+    border: none;
+
+    background: #111;
+    color: white;
+
+    padding: 13px;
+
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.comprar:hover {
+    background: #d4af37;
+
+    color: #111;
+}
+
+
+/* ================================
+   RODAPÉ
+================================ */
+
+footer {
+    background: #111;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 45px 20px;
+}
+
+footer h2 {
+    font-size: 25px;
+
+    margin-bottom: 10px;
+}
+
+footer p {
+    color: #aaa;
+
+    margin: 8px 0;
+}
+
+
+/* ================================
+   RESPONSIVIDADE
+================================ */
+
+@media (max-width: 900px) {
+
+    header {
+        padding: 0 4%;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    .banner-texto h2 {
+        font-size: 45px;
+    }
+
+    .produtos-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .categorias-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    header {
+        height: auto;
+
+        padding: 20px;
+
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    .banner {
+        min-height: 450px;
+
+        padding: 50px 7%;
+    }
+
+    .banner-texto h2 {
+        font-size: 38px;
+    }
+
+    .produtos-container {
+        grid-template-columns: 1fr;
+    }
+
+    .produtos {
+        padding: 60px 7%;
+    }
+}
+/* IMAGENS DOS PRODUTOS */
+
+.produto-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+}
