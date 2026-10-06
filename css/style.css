@@ -641,3 +641,195 @@ footer {
 .contato p {
     font-size: 18px;
 }
+/* ============================= */
+/* PÁGINA DE CONTATO */
+/* ============================= */
+
+.contato-pagina {
+    min-height: 650px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 50px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #050505,
+            #111,
+            #003cff,
+            #050505
+        );
+}
+
+.contato-box {
+    width: 90%;
+    max-width: 650px;
+
+    padding: 40px;
+
+    background-color: #111;
+
+    color: white;
+
+    border-radius: 15px;
+
+    border: 1px solid #004cff;
+
+    box-shadow:
+        0 0 10px rgba(0, 76, 255, 0.4),
+        0 0 30px rgba(0, 76, 255, 0.2);
+}
+
+.contato-box h2 {
+    text-align: center;
+
+    font-size: 34px;
+
+    margin-bottom: 15px;
+
+    color: white;
+
+    text-shadow:
+        0 0 8px #004cff;
+}
+
+.contato-descricao {
+    text-align: center;
+
+    color: #ccc;
+
+    margin-bottom: 30px;
+
+    line-height: 1.5;
+}
+
+.contato-box form {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.contato-box label {
+    margin-top: 15px;
+
+    margin-bottom: 7px;
+
+    color: #00aaff;
+
+    font-weight: bold;
+}
+
+.contato-box input,
+.contato-box select,
+.contato-box textarea {
+    width: 100%;
+
+    padding: 14px;
+
+    background-color: #222;
+
+    color: white;
+
+    border: 1px solid #444;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    font-family: Arial, sans-serif;
+
+    outline: none;
+}
+
+.contato-box input::placeholder,
+.contato-box textarea::placeholder {
+    color: #aaa;
+}
+
+.contato-box input:focus,
+.contato-box select:focus,
+.contato-box textarea:focus {
+    border-color: #004cff;
+
+    box-shadow:
+        0 0 8px rgba(0, 76, 255, 0.6);
+}
+
+.contato-box select option {
+    background-color: #222;
+
+    color: white;
+}
+
+.contato-box textarea {
+    resize: vertical;
+}
+
+.contato-box button {
+    margin-top: 25px;
+
+    padding: 15px;
+
+    background-color: #004cff;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 10px rgba(0, 76, 255, 0.5);
+
+    transition: 0.3s;
+}
+
+.contato-box button:hover {
+    background-color: #00aaff;
+
+    box-shadow:
+        0 0 20px rgba(0, 170, 255, 0.8);
+}
+
+#mensagemContatoEnviada {
+    text-align: center;
+
+    margin-top: 25px;
+}
+
+#mensagemContatoEnviada h3 {
+    color: #00aaff;
+
+    text-shadow:
+        0 0 8px #004cff;
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 768px) {
+
+    .contato-pagina {
+        padding: 30px 10px;
+    }
+
+    .contato-box {
+        width: 95%;
+
+        padding: 25px;
+    }
+
+    .contato-box h2 {
+        font-size: 27px;
+    }
+
+}

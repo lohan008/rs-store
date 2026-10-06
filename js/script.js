@@ -314,3 +314,42 @@ function mostrarTodos(event) {
             behavior: "smooth"
         });
 }
+// =============================
+// FORMULÁRIO DE CONTATO
+// =============================
+
+const formContato =
+    document.getElementById("formContato");
+
+if (formContato) {
+
+    formContato.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+            const nome =
+                document.getElementById("nomeContato").value;
+
+            formContato.style.display = "none";
+
+            document.getElementById(
+                "mensagemContatoEnviada"
+            ).innerHTML = `
+                <h3>Mensagem enviada!</h3>
+
+                <p>
+                    Obrigado, ${nome}!
+                    Recebemos sua mensagem.
+                </p>
+
+                <p>
+                    Em breve entraremos em contato.
+                </p>
+            `;
+
+        }
+    );
+
+}

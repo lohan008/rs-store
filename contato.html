@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Contato - RS Store</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+
+    <!-- CABEÇALHO -->
+
+    <header>
+
+        <div class="logo">
+            <h1>RS Store</h1>
+        </div>
+
+        <nav>
+
+            <a href="index.html">
+                Início
+            </a>
+
+            <a href="index.html#produtos">
+                Produtos
+            </a>
+
+            <a href="index.html">
+                Categorias
+            </a>
+
+            <a href="contato.html">
+                Contato
+            </a>
+
+            <a href="carrinho.html">
+                🛒 Carrinho
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- CONTEÚDO -->
+
+    <main>
+
+        <section class="contato-pagina">
+
+            <div class="contato-box">
+
+                <h2>
+                    Entre em contato
+                </h2>
+
+                <p class="contato-descricao">
+                    Tem alguma dúvida ou precisa de ajuda?
+                    Envie uma mensagem para a RS Store.
+                </p>
+
+
+                <form id="formContato">
+
+
+                    <!-- NOME -->
+
+                    <label for="nomeContato">
+                        Nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nomeContato"
+                        placeholder="Digite seu nome"
+                        required
+                    >
+
+
+                    <!-- EMAIL -->
+
+                    <label for="emailContato">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="emailContato"
+                        placeholder="Digite seu e-mail"
+                        required
+                    >
+
+
+                    <!-- ASSUNTO -->
+
+                    <label for="assuntoContato">
+                        Assunto
+                    </label>
+
+                    <select
+                        id="assuntoContato"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione um assunto
+                        </option>
+
+                        <option value="duvida">
+                            Dúvida
+                        </option>
+
+                        <option value="pedido">
+                            Pedido
+                        </option>
+
+                        <option value="problema">
+                            Problema com o pedido
+                        </option>
+
+                        <option value="outro">
+                            Outro
+                        </option>
+
+                    </select>
+
+
+                    <!-- MENSAGEM -->
+
+                    <label for="mensagemContato">
+                        Mensagem
+                    </label>
+
+                    <textarea
+                        id="mensagemContato"
+                        placeholder="Digite sua mensagem"
+                        rows="6"
+                        required
+                    ></textarea>
+
+
+                    <!-- BOTÃO -->
+
+                    <button type="submit">
+                        Enviar mensagem
+                    </button>
+
+                </form>
+
+
+                <!-- MENSAGEM DE SUCESSO -->
+
+                <div id="mensagemContatoEnviada"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+
+    <footer>
+
+        <p>
+            © 2026 RS Store - Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
