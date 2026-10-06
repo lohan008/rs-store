@@ -310,3 +310,59 @@ footer {
     }
 
 }
+.pagamento {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 35px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pagamento h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.pagamento form {
+    display: flex;
+    flex-direction: column;
+}
+
+.pagamento label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.pagamento input,
+.pagamento select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.pagamento button {
+    margin-top: 25px;
+    padding: 14px;
+    background-color: #111;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.pagamento button:hover {
+    background-color: #004cff;
+}
+
+#mensagemCompra {
+    text-align: center;
+    margin-top: 25px;
+}
+
+#mensagemCompra h2 {
+    color: #004cff;
+}

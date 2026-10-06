@@ -203,7 +203,6 @@ function removerProduto(index) {
 
 
 // FINALIZAR
-
 function finalizarCompra() {
 
     if (carrinho.length === 0) {
@@ -213,8 +212,7 @@ function finalizarCompra() {
         return;
     }
 
-
-    alert("Compra pronta para ser finalizada!");
+    window.location.href = "pagamento.html";
 
 }
 
@@ -222,3 +220,26 @@ function finalizarCompra() {
 // EXECUTAR
 
 mostrarCarrinho();
+// FINALIZAR PAGAMENTO
+
+const formPagamento = document.getElementById("formPagamento");
+
+if (formPagamento) {
+
+    formPagamento.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        localStorage.removeItem("carrinho");
+
+        document.getElementById("mensagemCompra").innerHTML = `
+            <h2>Compra finalizada!</h2>
+            <p>Obrigado pela sua compra na RS Store.</p>
+            <a href="index.html">Voltar para a loja</a>
+        `;
+
+        formPagamento.style.display = "none";
+
+    });
+
+}
