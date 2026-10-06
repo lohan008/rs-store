@@ -19,17 +19,69 @@
         </div>
 
         <nav>
+
             <a href="index.html">Início</a>
-            <a href="#">Produtos</a>
-            <a href="#">Categorias</a>
-            <a href="#">Contato</a>
+
+            <a href="#produtos">Produtos</a>
+
+
+            <!-- CATEGORIAS -->
+
+            <div class="menu-categorias">
+
+                <a href="#" onclick="mostrarTodos(event)">
+                    Categorias
+                </a>
+
+                <div class="submenu">
+
+                    <div class="submenu-titulo">
+                        👕 Roupas
+                    </div>
+
+                    <a href="#" onclick="filtrarCategoria('camiseta', event)">
+                        Camisetas
+                    </a>
+
+                    <a href="#" onclick="filtrarCategoria('calca', event)">
+                        Calças
+                    </a>
+
+                    <a href="#" onclick="filtrarCategoria('moletom', event)">
+                        Moletons
+                    </a>
+
+                    <a href="#" onclick="filtrarCategoria('short', event)">
+                        Shorts
+                    </a>
+
+
+                    <div class="submenu-titulo">
+                        🧢 Acessórios
+                    </div>
+
+                    <a href="#" onclick="filtrarCategoria('bone', event)">
+                        Bonés
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <a href="#contato">Contato</a>
+
             <a href="carrinho.html">🛒 Carrinho</a>
+
         </nav>
 
     </header>
 
 
     <main>
+
+
+        <!-- BANNER -->
 
         <section class="banner">
 
@@ -42,7 +94,9 @@
                     para todos os momentos.
                 </p>
 
-                <button onclick="document.querySelector('.destaques').scrollIntoView({behavior: 'smooth'})">
+                <button
+                    onclick="document.querySelector('.destaques').scrollIntoView({behavior: 'smooth'})"
+                >
                     Ver produtos
                 </button>
 
@@ -51,16 +105,20 @@
         </section>
 
 
-        <section class="destaques">
+        <!-- PRODUTOS -->
 
-            <h2>Produtos em destaque</h2>
+        <section class="destaques" id="produtos">
+
+            <h2 id="tituloProdutos">
+                Produtos em destaque
+            </h2>
 
             <div class="produtos">
 
 
                 <!-- CAMISETA -->
 
-                <div class="produto">
+                <div class="produto" data-categoria="camiseta">
 
                     <div class="produto-imagem">
 
@@ -76,7 +134,11 @@
                     <p>R$ 59,90</p>
 
                     <button
-                        onclick="adicionarCarrinho('Camiseta Masculina', 59.90, 'img/camiseta.jpg')"
+                        onclick="adicionarCarrinho(
+                            'Camiseta Masculina',
+                            59.90,
+                            'img/camiseta.jpg'
+                        )"
                     >
                         Comprar
                     </button>
@@ -86,7 +148,7 @@
 
                 <!-- CALÇA -->
 
-                <div class="produto">
+                <div class="produto" data-categoria="calca">
 
                     <div class="produto-imagem">
 
@@ -102,7 +164,11 @@
                     <p>R$ 129,90</p>
 
                     <button
-                        onclick="adicionarCarrinho('Calça Jeans Masculina', 129.90, 'img/calca.jpg')"
+                        onclick="adicionarCarrinho(
+                            'Calça Jeans Masculina',
+                            129.90,
+                            'img/calca.jpg'
+                        )"
                     >
                         Comprar
                     </button>
@@ -112,7 +178,7 @@
 
                 <!-- MOLETOM -->
 
-                <div class="produto">
+                <div class="produto" data-categoria="moletom">
 
                     <div class="produto-imagem">
 
@@ -128,7 +194,11 @@
                     <p>R$ 119,90</p>
 
                     <button
-                        onclick="adicionarCarrinho('Moletom Masculino', 119.90, 'img/moletom.jpg')"
+                        onclick="adicionarCarrinho(
+                            'Moletom Masculino',
+                            119.90,
+                            'img/moletom.jpg'
+                        )"
                     >
                         Comprar
                     </button>
@@ -138,7 +208,7 @@
 
                 <!-- SHORT -->
 
-                <div class="produto">
+                <div class="produto" data-categoria="short">
 
                     <div class="produto-imagem">
 
@@ -154,7 +224,11 @@
                     <p>R$ 69,90</p>
 
                     <button
-                        onclick="adicionarCarrinho('Short Masculino', 69.90, 'img/short.jpg')"
+                        onclick="adicionarCarrinho(
+                            'Short Masculino',
+                            69.90,
+                            'img/short.jpg'
+                        )"
                     >
                         Comprar
                     </button>
@@ -164,7 +238,7 @@
 
                 <!-- BONÉ -->
 
-                <div class="produto">
+                <div class="produto" data-categoria="bone">
 
                     <div class="produto-imagem">
 
@@ -180,7 +254,11 @@
                     <p>R$ 49,90</p>
 
                     <button
-                        onclick="adicionarCarrinho('Boné Masculino', 49.90, 'img/bone.jpg')"
+                        onclick="adicionarCarrinho(
+                            'Boné Masculino',
+                            49.90,
+                            'img/bone.jpg'
+                        )"
                     >
                         Comprar
                     </button>
@@ -191,6 +269,20 @@
             </div>
 
         </section>
+
+
+        <!-- CONTATO - APENAS ESPAÇO PARA O LINK FUNCIONAR DEPOIS -->
+
+        <section id="contato" class="contato">
+
+            <h2>Contato</h2>
+
+            <p>
+                Em breve você poderá entrar em contato com a RS Store.
+            </p>
+
+        </section>
+
 
     </main>
 

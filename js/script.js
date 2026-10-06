@@ -243,3 +243,74 @@ if (formPagamento) {
     });
 
 }
+// =============================
+// FILTRO DE CATEGORIAS
+// =============================
+
+function filtrarCategoria(categoria, event) {
+
+    event.preventDefault();
+
+    const produtos = document.querySelectorAll(".produto");
+
+    const titulo = document.getElementById("tituloProdutos");
+
+    produtos.forEach(function(produto) {
+
+        if (produto.dataset.categoria === categoria) {
+
+            produto.style.display = "block";
+
+        } else {
+
+            produto.style.display = "none";
+
+        }
+
+    });
+
+
+    const nomesCategorias = {
+        camiseta: "Camisetas",
+        calca: "Calças",
+        moletom: "Moletons",
+        short: "Shorts",
+        bone: "Bonés"
+    };
+
+    titulo.textContent =
+        nomesCategorias[categoria];
+
+
+    document
+        .querySelector(".destaques")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+// MOSTRAR TODOS OS PRODUTOS
+
+function mostrarTodos(event) {
+
+    event.preventDefault();
+
+    const produtos = document.querySelectorAll(".produto");
+
+    produtos.forEach(function(produto) {
+
+        produto.style.display = "block";
+
+    });
+
+    document.getElementById("tituloProdutos").textContent =
+        "Produtos em destaque";
+
+
+    document
+        .querySelector(".destaques")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}

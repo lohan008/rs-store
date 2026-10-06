@@ -539,3 +539,105 @@ footer {
         font-size: 27px;
     }
 }
+/* ============================= */
+/* MENU DE CATEGORIAS */
+/* ============================= */
+
+.menu-categorias {
+    position: relative;
+}
+
+.menu-categorias > a {
+    cursor: pointer;
+}
+
+
+/* SUBMENU */
+
+.submenu {
+    display: none;
+
+    position: absolute;
+
+    top: 100%;
+    left: 0;
+
+    width: 200px;
+
+    background-color: #111;
+
+    border: 1px solid #004cff;
+
+    border-radius: 8px;
+
+    padding: 10px 0;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.5);
+
+    z-index: 1000;
+}
+
+
+/* MOSTRAR SUBMENU AO PASSAR O MOUSE */
+
+.menu-categorias:hover .submenu {
+    display: block;
+}
+
+
+/* LINKS DO SUBMENU */
+
+.submenu a {
+    display: block;
+
+    padding: 10px 15px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 15px;
+}
+
+.submenu a:hover {
+    background-color: #004cff;
+
+    color: white;
+}
+
+
+/* TÍTULO DAS SUBCATEGORIAS */
+
+.submenu-titulo {
+    padding: 8px 15px;
+
+    color: #00aaff;
+
+    font-weight: bold;
+
+    border-bottom: 1px solid #333;
+
+    margin-bottom: 3px;
+}
+
+
+/* CONTATO TEMPORÁRIO */
+
+.contato {
+    padding: 60px 20px;
+
+    text-align: center;
+
+    background-color: #eeeeee;
+}
+
+.contato h2 {
+    font-size: 32px;
+
+    margin-bottom: 15px;
+}
+
+.contato p {
+    font-size: 18px;
+}
