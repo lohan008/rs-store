@@ -1,1 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Carrinho - RS Store</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            <h1>RS Store</h1>
+        </div>
+
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="carrinho.html">🛒 Carrinho</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="carrinho">
+
+            <h2>Seu Carrinho</h2>
+
+            <div id="listaCarrinho"></div>
+
+            <div class="total-carrinho">
+
+                <h3>
+                    Total:
+                    R$ <span id="totalCarrinho">0,00</span>
+                </h3>
+
+                <button onclick="finalizarCompra()">
+                    Finalizar compra
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 RS Store - Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
