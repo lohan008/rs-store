@@ -116,11 +116,25 @@ nav a:hover {
     margin-bottom: 35px;
 }
 
+
+/* ============================= */
+/* 3 PRODUTOS POR LINHA */
+/* ============================= */
+
 .produtos {
-    display: flex;
+    display: grid;
+
+    grid-template-columns: repeat(3, 280px);
+
     justify-content: center;
+
     gap: 30px;
-    flex-wrap: wrap;
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin: 0 auto;
 }
 
 .produto {
@@ -430,7 +444,9 @@ nav a:hover {
 }
 
 
+/* ============================= */
 /* MENSAGEM DA COMPRA */
+/* ============================= */
 
 #mensagemCompra {
     text-align: center;
@@ -483,6 +499,15 @@ footer {
 /* RESPONSIVIDADE */
 /* ============================= */
 
+@media (max-width: 1000px) {
+
+    .produtos {
+        grid-template-columns: repeat(2, 280px);
+        max-width: 600px;
+    }
+}
+
+
 @media (max-width: 768px) {
 
     header {
@@ -513,6 +538,23 @@ footer {
         padding: 40px 20px;
     }
 
+
+    /* PRODUTOS NO CELULAR */
+
+    .produtos {
+        grid-template-columns: 1fr;
+
+        justify-items: center;
+
+        max-width: 100%;
+    }
+
+    .produto {
+        width: 280px;
+        max-width: 100%;
+    }
+
+
     .carrinho {
         padding: 30px 20px;
     }
@@ -539,6 +581,8 @@ footer {
         font-size: 27px;
     }
 }
+
+
 /* ============================= */
 /* MENU DE CATEGORIAS */
 /* ============================= */
@@ -641,6 +685,8 @@ footer {
 .contato p {
     font-size: 18px;
 }
+
+
 /* ============================= */
 /* PÁGINA DE CONTATO */
 /* ============================= */
@@ -814,7 +860,7 @@ footer {
 }
 
 
-/* RESPONSIVO */
+/* RESPONSIVO DO CONTATO */
 
 @media (max-width: 768px) {
 
