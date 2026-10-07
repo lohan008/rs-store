@@ -353,3 +353,73 @@ if (formContato) {
     );
 
 }
+// ===============================
+// LOGIN
+// ===============================
+
+const formLogin = document.getElementById("formLogin");
+
+if (formLogin) {
+
+    formLogin.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const usuario =
+            document.getElementById("usuario").value.trim();
+
+        const senha =
+            document.getElementById("senha").value;
+
+        const mensagem =
+            document.getElementById("mensagemLogin");
+
+        // SENHA DO SITE
+        if (senha === "123") {
+
+            localStorage.setItem("usuarioLogado", usuario);
+
+            window.location.href = "index.html";
+
+        } else {
+
+            mensagem.textContent =
+                "Senha incorreta. Tente novamente.";
+
+            mensagem.style.color = "red";
+        }
+
+    });
+
+}
+// ===============================
+// MOSTRAR USUÁRIO LOGADO
+// ===============================
+
+const usuarioElemento =
+    document.getElementById("usuarioLogado");
+
+if (usuarioElemento) {
+
+    const usuario =
+        localStorage.getItem("usuarioLogado");
+
+    if (usuario) {
+
+        usuarioElemento.textContent =
+            "Olá, " + usuario + "!";
+
+    }
+
+}
+// ===============================
+// SAIR DA CONTA
+// ===============================
+
+function sairDaConta() {
+
+    localStorage.removeItem("usuarioLogado");
+
+    window.location.href = "login.html";
+
+}

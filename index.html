@@ -14,13 +14,22 @@
 
 <body>
 
+    <script>
+        const usuarioLogado = localStorage.getItem("usuarioLogado");
+    
+        if (!usuarioLogado) {
+            window.location.href = "login.html";
+        }
+    </script>
+
     <header>
-
         <div class="logo">
-            <h1>RS Store</h1>
-        </div>
 
-        <nav>
+            <h1>RS Store</h1>
+        
+            <p id="usuarioLogado"></p>
+        
+        </div>
 
             <a href="index.html">
                 Início
@@ -80,6 +89,8 @@
                 🛒 Carrinho
             </a>
 
+            <a href="#" onclick="sairDaConta()">Sair</a>
+            
         </nav>
 
     </header>
