@@ -58,7 +58,6 @@ function mostrarCarrinho() {
         document.getElementById("totalCarrinho");
 
 
-    // Se não estiver na página do carrinho
     if (!lista) {
         return;
     }
@@ -177,7 +176,7 @@ function mostrarCarrinho() {
 
 
     // ========================================
-    // CALCULAR DESCONTO DO CUPOM
+    // CALCULAR DESCONTO
     // ========================================
 
     let desconto =
@@ -349,7 +348,6 @@ function atualizarResumoPagamento() {
         document.getElementById("totalPagamento");
 
 
-    // Se não estiver na página de pagamento
     if (
         !subtotalElemento ||
         !descontoElemento ||
@@ -396,10 +394,22 @@ function atualizarResumoPagamento() {
     // PEGAR FRETE
     // ========================================
 
-    const frete =
+    const freteGratis =
+        localStorage.getItem("freteGratis") === "true";
+
+
+    let frete =
         parseFloat(
             localStorage.getItem("freteAtual")
         ) || 0;
+
+
+    // Se o cupom de frete grátis estiver ativo
+    if (freteGratis) {
+
+        frete = 0;
+
+    }
 
 
     // ========================================
@@ -436,10 +446,19 @@ function atualizarResumoPagamento() {
     // MOSTRAR FRETE
     // ========================================
 
-    freteElemento.textContent =
-        frete
-            .toFixed(2)
-            .replace(".", ",");
+    if (freteGratis) {
+
+        freteElemento.textContent =
+            "GRÁTIS";
+
+    } else {
+
+        freteElemento.textContent =
+            frete
+                .toFixed(2)
+                .replace(".", ",");
+
+    }
 
 
     // ========================================
@@ -468,9 +487,6 @@ atualizarResumoPagamento();
 const estadoPagamento =
     document.getElementById("estado");
 
-
-// Valores de frete simulados para a loja
-// com origem em Indaiatuba - SP
 
 const fretesPorEstado = {
 
@@ -598,9 +614,6 @@ function adicionarDiasUteis(data, quantidade) {
             novaData.getDay();
 
 
-        // 0 = domingo
-        // 6 = sábado
-
         if (
             diaSemana !== 0 &&
             diaSemana !== 6
@@ -679,6 +692,7 @@ function calcularFrete() {
 
         }
 
+
         if (fretePagamentoElemento) {
 
             fretePagamentoElemento.textContent =
@@ -716,7 +730,10 @@ function calcularFrete() {
         fretesPorEstado[estado] || 39.90;
 
 
-    // Salvar frete
+    // ========================================
+    // SALVAR FRETE
+    // ========================================
+
     localStorage.setItem(
         "freteAtual",
         frete
@@ -727,22 +744,44 @@ function calcularFrete() {
     // MOSTRAR VALOR DO FRETE
     // ========================================
 
+    const freteGratis =
+        localStorage.getItem("freteGratis") === "true";
+
+
     if (valorFreteElemento) {
 
-        valorFreteElemento.textContent =
-            frete
-                .toFixed(2)
-                .replace(".", ",");
+        if (freteGratis) {
+
+            valorFreteElemento.textContent =
+                "GRÁTIS";
+
+        } else {
+
+            valorFreteElemento.textContent =
+                frete
+                    .toFixed(2)
+                    .replace(".", ",");
+
+        }
 
     }
 
 
     if (fretePagamentoElemento) {
 
-        fretePagamentoElemento.textContent =
-            frete
-                .toFixed(2)
-                .replace(".", ",");
+        if (freteGratis) {
+
+            fretePagamentoElemento.textContent =
+                "GRÁTIS";
+
+        } else {
+
+            fretePagamentoElemento.textContent =
+                frete
+                    .toFixed(2)
+                    .replace(".", ",");
+
+        }
 
     }
 
@@ -792,7 +831,6 @@ function calcularFrete() {
     }
 
 
-    // Atualizar resumo
     atualizarResumoPagamento();
 
 }
@@ -848,6 +886,11 @@ if (formPagamento) {
 
             localStorage.removeItem(
                 "freteAtual"
+            );
+
+
+            localStorage.removeItem(
+                "freteGratis"
             );
 
 
@@ -1057,7 +1100,6 @@ if (formLogin) {
                 );
 
 
-            // SENHA DO SITE
             if (senha === "123") {
 
                 localStorage.setItem(
@@ -1172,6 +1214,12 @@ function aplicarCupom() {
         desconto = 10;
 
 
+        // Desativa frete grátis
+        localStorage.removeItem(
+            "freteGratis"
+        );
+
+
         mensagem.textContent =
             "Cupom RS10 aplicado! Você ganhou 10% de desconto.";
 
@@ -1191,8 +1239,39 @@ function aplicarCupom() {
         desconto = 20;
 
 
+        // Desativa frete grátis
+        localStorage.removeItem(
+            "freteGratis"
+        );
+
+
         mensagem.textContent =
             "Cupom RS20 aplicado! Você ganhou 20% de desconto.";
+
+
+        mensagem.style.color =
+            "green";
+
+    }
+
+
+    // ========================================
+    // CUPOM FRETE GRÁTIS
+    // ========================================
+
+    else if (codigo === "FRETEGRATIS") {
+
+        desconto = 0;
+
+
+        localStorage.setItem(
+            "freteGratis",
+            "true"
+        );
+
+
+        mensagem.textContent =
+            "Cupom FRETEGRATIS aplicado! Você ganhou frete grátis.";
 
 
         mensagem.style.color =
@@ -1209,6 +1288,11 @@ function aplicarCupom() {
 
         localStorage.removeItem(
             "descontoCupom"
+        );
+
+
+        localStorage.removeItem(
+            "freteGratis"
         );
 
 
@@ -1236,7 +1320,20 @@ function aplicarCupom() {
     );
 
 
-    // Atualizar valores
+    // ========================================
+    // ATUALIZAR CARRINHO
+    // ========================================
+
     mostrarCarrinho();
+
+
+    // ========================================
+    // ATUALIZAR PAGAMENTO
+    // ========================================
+
+    atualizarResumoPagamento();
+
+
+    calcularFrete();
 
 }
