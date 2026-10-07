@@ -998,3 +998,46 @@ footer {
 
     font-weight: bold;
 }
+/* ===============================
+   CUPOM DE DESCONTO
+================================ */
+
+.cupom {
+    margin-bottom: 20px;
+}
+
+.cupom h3 {
+    margin-bottom: 10px;
+}
+
+.cupom-area {
+    display: flex;
+    gap: 10px;
+}
+
+.cupom-area input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    flex: 1;
+}
+
+.cupom-area button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    background: #006eff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cupom-area button:hover {
+    background: #004bb5;
+}
+
+#mensagemCupom {
+    margin-top: 8px;
+    font-weight: bold;
+}

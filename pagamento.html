@@ -25,24 +25,37 @@
 
     </header>
 
+
     <main>
 
         <section class="pagamento">
 
             <h2>Finalizar compra</h2>
 
+
+            <!-- =========================
+                 DADOS DO CLIENTE
+            ========================== -->
+
+            <h3>Dados pessoais</h3>
+
             <form id="formPagamento">
 
-                <label for="nome">Nome completo</label>
+                <label for="nome">
+                    Nome completo
+                </label>
 
                 <input
                     type="text"
                     id="nome"
-                    placeholder="Digite seu nome"
+                    placeholder="Digite seu nome completo"
                     required
                 >
 
-                <label for="email">E-mail</label>
+
+                <label for="email">
+                    E-mail
+                </label>
 
                 <input
                     type="email"
@@ -51,20 +64,202 @@
                     required
                 >
 
-                <label for="endereco">Endereço</label>
+
+                <!-- =========================
+                     ENDEREÇO DE ENTREGA
+                ========================== -->
+
+                <h3 class="titulo-entrega">
+                    Endereço de entrega
+                </h3>
+
+
+                <label for="cep">
+                    CEP
+                </label>
+
+                <input
+                    type="text"
+                    id="cep"
+                    placeholder="Ex.: 13300-000"
+                    maxlength="9"
+                    required
+                >
+
+
+                <label for="endereco">
+                    Rua
+                </label>
 
                 <input
                     type="text"
                     id="endereco"
-                    placeholder="Digite seu endereço"
+                    placeholder="Digite sua rua"
                     required
                 >
 
-                <label for="formaPagamento">
-                    Forma de pagamento
+
+                <label for="numero">
+                    Número
                 </label>
 
-                <select id="formaPagamento" required>
+                <input
+                    type="text"
+                    id="numero"
+                    placeholder="Número da residência"
+                    required
+                >
+
+
+                <label for="bairro">
+                    Bairro
+                </label>
+
+                <input
+                    type="text"
+                    id="bairro"
+                    placeholder="Digite seu bairro"
+                    required
+                >
+
+
+                <label for="cidade">
+                    Cidade
+                </label>
+
+                <input
+                    type="text"
+                    id="cidade"
+                    placeholder="Digite sua cidade"
+                    required
+                >
+
+
+                <label for="estado">
+                    Estado
+                </label>
+
+                <select id="estado" required>
+
+                    <option value="">
+                        Selecione seu estado
+                    </option>
+
+                    <option value="AC">Acre - AC</option>
+                    <option value="AL">Alagoas - AL</option>
+                    <option value="AP">Amapá - AP</option>
+                    <option value="AM">Amazonas - AM</option>
+                    <option value="BA">Bahia - BA</option>
+                    <option value="CE">Ceará - CE</option>
+                    <option value="DF">Distrito Federal - DF</option>
+                    <option value="ES">Espírito Santo - ES</option>
+                    <option value="GO">Goiás - GO</option>
+                    <option value="MA">Maranhão - MA</option>
+                    <option value="MT">Mato Grosso - MT</option>
+                    <option value="MS">Mato Grosso do Sul - MS</option>
+                    <option value="MG">Minas Gerais - MG</option>
+                    <option value="PA">Pará - PA</option>
+                    <option value="PB">Paraíba - PB</option>
+                    <option value="PR">Paraná - PR</option>
+                    <option value="PE">Pernambuco - PE</option>
+                    <option value="PI">Piauí - PI</option>
+                    <option value="RJ">Rio de Janeiro - RJ</option>
+                    <option value="RN">Rio Grande do Norte - RN</option>
+                    <option value="RS">Rio Grande do Sul - RS</option>
+                    <option value="RO">Rondônia - RO</option>
+                    <option value="RR">Roraima - RR</option>
+                    <option value="SC">Santa Catarina - SC</option>
+                    <option value="SP">São Paulo - SP</option>
+                    <option value="SE">Sergipe - SE</option>
+                    <option value="TO">Tocantins - TO</option>
+
+                </select>
+
+
+                <label for="complemento">
+                    Complemento
+                </label>
+
+                <input
+                    type="text"
+                    id="complemento"
+                    placeholder="Apartamento, bloco, etc. (opcional)"
+                >
+
+
+                <!-- =========================
+                     INFORMAÇÕES DE ENTREGA
+                ========================== -->
+
+                <div class="frete-box">
+
+                    <h3>Entrega</h3>
+
+                    <p>
+                        Loja de origem:
+                        <strong>Indaiatuba - SP</strong>
+                    </p>
+
+                    <p>
+                        Frete:
+                        R$ <span id="valorFrete">0,00</span>
+                    </p>
+
+                    <p id="prazoEntrega">
+                        Selecione seu estado para calcular o frete.
+                    </p>
+
+                </div>
+
+
+                <!-- =========================
+                     RESUMO DA COMPRA
+                ========================== -->
+
+                <div class="resumo-pagamento">
+
+                    <h3>Resumo da compra</h3>
+
+                    <p>
+                        Subtotal:
+                        R$ <span id="subtotalPagamento">0,00</span>
+                    </p>
+
+                    <p>
+                        Desconto:
+                        - R$ <span id="descontoPagamento">0,00</span>
+                    </p>
+
+                    <p>
+                        Frete:
+                        R$ <span id="fretePagamento">0,00</span>
+                    </p>
+
+                    <h3>
+                        Total:
+                        R$ <span id="totalPagamento">0,00</span>
+                    </h3>
+
+                </div>
+
+
+                <!-- =========================
+                     FORMA DE PAGAMENTO
+                ========================== -->
+
+                <h3 class="titulo-pagamento">
+                    Forma de pagamento
+                </h3>
+
+
+                <label for="formaPagamento">
+                    Escolha a forma de pagamento
+                </label>
+
+                <select
+                    id="formaPagamento"
+                    required
+                >
 
                     <option value="">
                         Selecione
@@ -84,17 +279,20 @@
 
                 </select>
 
+
                 <button type="submit">
                     Finalizar compra
                 </button>
 
             </form>
 
+
             <div id="mensagemCompra"></div>
 
         </section>
 
     </main>
+
 
     <footer>
 
@@ -103,6 +301,7 @@
         </p>
 
     </footer>
+
 
     <script src="js/script.js"></script>
 

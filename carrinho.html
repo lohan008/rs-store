@@ -34,12 +34,52 @@
 
             <div id="listaCarrinho"></div>
 
+
+            <!-- CUPOM DE DESCONTO -->
+
             <div class="total-carrinho">
+
+                <div class="cupom">
+
+                    <h3>Tem um cupom?</h3>
+
+                    <div class="cupom-area">
+
+                        <input
+                            type="text"
+                            id="codigoCupom"
+                            placeholder="Digite seu cupom"
+                        >
+
+                        <button onclick="aplicarCupom()">
+                            Aplicar
+                        </button>
+
+                    </div>
+
+                    <p id="mensagemCupom"></p>
+
+                </div>
+
+
+                <!-- VALORES DA COMPRA -->
+
+                <p>
+                    Subtotal:
+                    R$ <span id="subtotalCarrinho">0,00</span>
+                </p>
+
+                <p>
+                    Desconto:
+                    - R$ <span id="descontoCarrinho">0,00</span>
+                </p>
+
 
                 <h3>
                     Total:
                     R$ <span id="totalCarrinho">0,00</span>
                 </h3>
+
 
                 <button onclick="finalizarCompra()">
                     Finalizar compra
