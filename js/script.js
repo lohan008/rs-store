@@ -2580,3 +2580,149 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
+// ========================================
+// FILTROS DE PRODUTOS
+// ========================================
+
+let categoriaSelecionada = "";
+
+function aplicarFiltros() {
+
+    const busca = document
+        .getElementById("buscaProduto")
+        .value.toLowerCase();
+
+    const marca = document
+        .getElementById("filtroMarca")
+        .value;
+
+    const precoMinimo = parseFloat(
+        document.getElementById("precoMinimo").value
+    ) || 0;
+
+    const valorMaximo = document.getElementById("precoMaximo").value;
+
+    const precoMaximo = valorMaximo === ""
+        ? Infinity
+        : parseFloat(valorMaximo);
+
+    const produtos = document.querySelectorAll(".produto");
+
+    produtos.forEach(produto => {
+
+        const nome = produto.querySelector("h3").textContent;
+
+        const nomeMinusculo = nome.toLowerCase();
+
+        const textoPreco = produto.querySelector("p").textContent;
+
+        const preco = parseFloat(
+            textoPreco
+                .replace("R$", "")
+                .replace(/\./g, "")
+                .replace(",", ".")
+                .trim()
+        );
+
+        let marcaProduto = "Sem marca";
+
+        const marcas = [
+            "Louis Vuitton",
+            "Tommy Hilfiger",
+            "Quiksilver",
+            "Adidas",
+            "Nike",
+            "Lacoste"
+        ];
+
+        marcas.forEach(nomeMarca => {
+
+            if (nome.includes(nomeMarca)) {
+                marcaProduto = nomeMarca;
+            }
+
+        });
+
+        const correspondeNome = nomeMinusculo.includes(busca);
+
+        const correspondeMarca =
+            marca === "" || marcaProduto === marca;
+
+        const correspondePreco =
+            preco >= precoMinimo && preco <= precoMaximo;
+
+        const correspondeCategoria =
+            categoriaSelecionada === "" ||
+            produto.dataset.categoria === categoriaSelecionada;
+
+        if (
+            correspondeNome &&
+            correspondeMarca &&
+            correspondePreco &&
+            correspondeCategoria
+        ) {
+            produto.style.display = "";
+        } else {
+            produto.style.display = "none";
+        }
+
+    });
+
+}
+
+
+// ========================================
+// FILTRAR POR MENOR PREÇO
+// ========================================
+
+function ordenarMenorPreco() {
+
+    const container = document.querySelector(".produtos");
+
+    const produtos = Array.from(
+        container.querySelectorAll(".produto")
+    );
+
+    produtos.sort((a, b) => {
+
+        function pegarPreco(produto) {
+
+            return parseFloat(
+                produto.querySelector("p").textContent
+                    .replace("R$", "")
+                    .replace(/\./g, "")
+                    .replace(",", ".")
+                    .trim()
+            );
+
+        }
+
+        return pegarPreco(a) - pegarPreco(b);
+
+    });
+
+    produtos.forEach(produto => {
+        container.appendChild(produto);
+    });
+
+    aplicarFiltros();
+
+}
+
+
+// ========================================
+// LIMPAR TODOS OS FILTROS
+// ========================================
+
+function limparFiltros() {
+
+    document.getElementById("buscaProduto").value = "";
+    document.getElementById("filtroMarca").value = "";
+    document.getElementById("precoMinimo").value = "";
+    document.getElementById("precoMaximo").value = "";
+
+    categoriaSelecionada = "";
+
+    aplicarFiltros();
+
+}

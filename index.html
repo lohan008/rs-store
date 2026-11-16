@@ -129,8 +129,55 @@
             <h2 id="tituloProdutos">
                 Produtos em destaque
             </h2>
-
-
+            
+            <!-- FILTROS DE PRODUTOS -->
+            
+            <div class="filtros-produtos">
+            
+                <input
+                    type="text"
+                    id="buscaProduto"
+                    placeholder="Buscar produto pelo nome..."
+                    oninput="aplicarFiltros()"
+                >
+            
+                <select id="filtroMarca" onchange="aplicarFiltros()">
+                    <option value="">Todas as marcas</option>
+                    <option value="Nike">Nike</option>
+                    <option value="Adidas">Adidas</option>
+                    <option value="Tommy Hilfiger">Tommy Hilfiger</option>
+                    <option value="Quiksilver">Quiksilver</option>
+                    <option value="Lacoste">Lacoste</option>
+                    <option value="Louis Vuitton">Louis Vuitton</option>
+                    <option value="Sem marca">Sem marca</option>
+                </select>
+            
+                <input
+                    type="number"
+                    id="precoMinimo"
+                    placeholder="Preço mínimo"
+                    min="0"
+                    oninput="aplicarFiltros()"
+                >
+            
+                <input
+                    type="number"
+                    id="precoMaximo"
+                    placeholder="Preço máximo"
+                    min="0"
+                    oninput="aplicarFiltros()"
+                >
+            
+                <button type="button" onclick="ordenarMenorPreco()">
+                    Menor preço
+                </button>
+            
+                <button type="button" onclick="limparFiltros()">
+                    Limpar filtros
+                </button>
+            
+            </div>
+            
             <div class="produtos">
 
 
