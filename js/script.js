@@ -1,3 +1,4 @@
+
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
 
@@ -5,9 +6,11 @@ let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 // ADICIONAR PRODUTO
 // ========================================
 
-function adicionarCarrinho(nome, preco, imagem) {
+function adicionarCarrinho(nome, preco, imagem, tamanho = "") {
 
-    let produto = carrinho.find(item => item.nome === nome);
+    let produto = carrinho.find(item =>
+        item.nome === nome && item.tamanho === tamanho
+    );
 
     if (produto) {
 
@@ -19,6 +22,7 @@ function adicionarCarrinho(nome, preco, imagem) {
             nome: nome,
             preco: preco,
             imagem: imagem,
+            tamanho: tamanho,
             quantidade: 1
         });
 
@@ -130,7 +134,14 @@ function mostrarCarrinho() {
                     </h3>
 
                     <p>
-                        R$ ${produto.preco
+                        Tamanho:
+                        <strong>
+                            ${produto.tamanho || "Não informado"}
+                        </strong>
+                    </p>
+
+                    <p>
+                        R$ ${Number(produto.preco)
                             .toFixed(2)
                             .replace(".", ",")}
                     </p>
@@ -242,43 +253,6 @@ function mostrarCarrinho() {
 
 }
 
-
-// ========================================
-// AUMENTAR QUANTIDADE
-// ========================================
-
-function aumentarQuantidade(index) {
-
-    carrinho[index].quantidade++;
-
-    salvarCarrinho();
-
-    mostrarCarrinho();
-
-}
-
-
-// ========================================
-// DIMINUIR QUANTIDADE
-// ========================================
-
-function diminuirQuantidade(index) {
-
-    if (carrinho[index].quantidade > 1) {
-
-        carrinho[index].quantidade--;
-
-    } else {
-
-        carrinho.splice(index, 1);
-
-    }
-
-    salvarCarrinho();
-
-    mostrarCarrinho();
-
-}
 
 
 // ========================================
@@ -2767,7 +2741,7 @@ function mostrarOfertas(event) {
     contador.textContent = totalOfertas + " produtos em oferta";
     
     contador.style.display = "block";
-    
+
     document.getElementById("produtos").scrollIntoView({
         behavior: "smooth"
     });
@@ -2812,5 +2786,105 @@ document.querySelectorAll(".produto").forEach(produto => {
         `;
 
     }
+
+});
+// ========================================
+// TAMANHOS DE TODOS OS PRODUTOS
+// ========================================
+
+document.querySelectorAll(".produto").forEach(produto => {
+
+    const categoria = produto.dataset.categoria;
+
+    let tamanhos = [];
+
+    if (categoria === "camiseta" || categoria === "moletom") {
+        tamanhos = ["P", "M", "G", "GG"];
+    }
+
+    else if (categoria === "calca" || categoria === "short") {
+        tamanhos = ["36", "38", "40", "42", "44", "46"];
+    }
+
+    else if (categoria === "bone") {
+        tamanhos = ["Único"];
+    }
+
+    const seletor = document.createElement("select");
+
+    seletor.className = "seletor-tamanho";
+
+    seletor.innerHTML = `
+        <option value="">Selecione o tamanho</option>
+    `;
+
+    tamanhos.forEach(tamanho => {
+
+        const opcao = document.createElement("option");
+
+        opcao.value = tamanho;
+        opcao.textContent = tamanho;
+
+        seletor.appendChild(opcao);
+
+    });
+
+    const avaliacao = produto.querySelector(".avaliacao-produto");
+
+    produto.insertBefore(seletor, avaliacao);
+
+    // Localiza o botão Comprar
+    const botoes = Array.from(produto.querySelectorAll(":scope > button"));
+
+    const botaoComprar = botoes.find(botao =>
+        botao.getAttribute("onclick")?.includes("adicionarCarrinho")
+    );
+
+    if (!botaoComprar) return;
+
+    const chamada = botaoComprar.getAttribute("onclick");
+
+    const dados = chamada.match(
+        /adicionarCarrinho\('([^']*)',\s*([\d.]+),\s*'([^']*)'\)/
+    );
+
+    if (!dados) return;
+
+    const nome = dados[1];
+    const imagem = dados[3];
+
+    botaoComprar.removeAttribute("onclick");
+
+    botaoComprar.addEventListener("click", function() {
+
+        if (!seletor.value) {
+            alert("Selecione um tamanho antes de comprar!");
+            return;
+        }
+
+        const precoOferta = produto.querySelector(".preco-oferta");
+
+        const precoElemento = produto.querySelector("p");
+
+        const textoPreco = precoOferta
+            ? precoOferta.textContent
+            : precoElemento.textContent;
+
+        const preco = parseFloat(
+            textoPreco
+                .replace("R$", "")
+                .replace(/\./g, "")
+                .replace(",", ".")
+                .trim()
+        );
+
+        adicionarCarrinho(
+            nome,
+            preco,
+            imagem,
+            seletor.value
+        );
+
+    });
 
 });

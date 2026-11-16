@@ -1,10 +1,13 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Comprovante - RS Store</title>
+
     <link rel="stylesheet" href="css/style.css">
 
     <style>
@@ -43,6 +46,12 @@
             justify-content: space-between;
             gap: 15px;
             margin: 12px 0;
+        }
+
+        .produto-comprovante small {
+            display: inline-block;
+            margin-top: 5px;
+            color: #aaa;
         }
 
         .total-comprovante {
@@ -132,7 +141,8 @@
         }
 
         @media print {
-            header, .botoes-comprovante {
+            header,
+            .botoes-comprovante {
                 display: none !important;
             }
 
@@ -161,6 +171,7 @@
 
     <header>
         <h1>RS Store</h1>
+
         <nav>
             <a href="index.html">Início</a>
             <a href="index.html#produtos">Produtos</a>
@@ -176,6 +187,11 @@
     </main>
 
     <script>
+
+        // ========================================
+        // CARREGAR COMPROVANTE
+        // ========================================
+
         function carregarComprovante() {
 
             const area = document.getElementById(
@@ -191,7 +207,11 @@
                 area.innerHTML = `
                     <div class="sem-comprovante">
                         <h2>Nenhum comprovante encontrado</h2>
-                        <p>Finalize uma compra para visualizar seu comprovante.</p>
+
+                        <p>
+                            Finalize uma compra para visualizar seu comprovante.
+                        </p>
+
                         <a href="index.html">Voltar para a loja</a>
                     </div>
                 `;
@@ -199,29 +219,53 @@
                 return;
             }
 
+
+            // ========================================
+            // PRODUTOS COMPRADOS
+            // ========================================
+
             let produtosHTML = "";
 
             comprovante.produtos.forEach(function(produto) {
 
                 const quantidade = Number(produto.quantidade) || 1;
+
                 const subtotalProduto =
                     Number(produto.preco) * quantidade;
 
                 produtosHTML += `
                     <div class="produto-comprovante">
+
                         <span>
                             ${produto.nome} (x${quantidade})
+
+                            <br>
+
+                            <small>
+                                Tamanho: ${produto.tamanho || "Não informado"}
+                            </small>
                         </span>
 
                         <strong>
                             R$ ${subtotalProduto.toFixed(2).replace(".", ",")}
                         </strong>
+
                     </div>
                 `;
 
             });
 
+
+            // ========================================
+            // DADOS DO CLIENTE
+            // ========================================
+
             const cliente = comprovante.cliente || {};
+
+
+            // ========================================
+            // MONTAR COMPROVANTE
+            // ========================================
 
             area.innerHTML = `
 
@@ -229,7 +273,9 @@
 
                 <p>Obrigado por comprar na RS Store.</p>
 
+
                 <div class="comprovante-secao">
+
                     <h2>Dados do pedido</h2>
 
                     <p>
@@ -241,83 +287,93 @@
                         <strong>Data:</strong>
                         ${comprovante.data}
                     </p>
+
                 </div>
 
+
                 <div class="comprovante-secao">
+
                     <h2>Produtos comprados</h2>
+
                     ${produtosHTML}
+
                 </div>
 
+
                 <div class="comprovante-secao">
+
                     <h2>Dados do cliente</h2>
 
-                    <p><strong>Nome:</strong> ${cliente.nome || "Não informado"}</p>
-                    <p><strong>E-mail:</strong> ${cliente.email || "Não informado"}</p>
+                    <p>
+                        <strong>Nome:</strong>
+                        ${cliente.nome || "Não informado"}
+                    </p>
+
+                    <p>
+                        <strong>E-mail:</strong>
+                        ${cliente.email || "Não informado"}
+                    </p>
+
                     <p>
                         <strong>Endereço:</strong>
                         ${cliente.endereco || ""}, ${cliente.numero || ""}
                     </p>
+
                     <p>
                         <strong>Cidade:</strong>
                         ${cliente.cidade || ""} - ${cliente.estado || ""}
                     </p>
+
                 </div>
 
+
                 <div class="comprovante-secao">
+
                     <h2>Pagamento</h2>
 
                     <p>
                         <strong>Forma de pagamento:</strong>
                         ${comprovante.pagamento || "Não informado"}
                     </p>
+
                 </div>
 
+
                 <div class="comprovante-secao">
+
                     <h2>Resumo financeiro</h2>
 
-                    <p>Subtotal: R$ ${comprovante.subtotal.toFixed(2).replace(".", ",")}</p>
+                    <p>
+                        Subtotal:
+                        R$ ${Number(comprovante.subtotal).toFixed(2).replace(".", ",")}
+                    </p>
 
-                    <p>Desconto: R$ ${comprovante.desconto.toFixed(2).replace(".", ",")}</p>
+                    <p>
+                        Desconto:
+                        R$ ${Number(comprovante.desconto).toFixed(2).replace(".", ",")}
+                    </p>
 
-                    <p>Frete: R$ ${comprovante.frete.toFixed(2).replace(".", ",")}</p>
+                    <p>
+                        Frete:
+                        R$ ${Number(comprovante.frete).toFixed(2).replace(".", ",")}
+                    </p>
 
                     <p class="total-comprovante">
-                        Total: R$ ${comprovante.total.toFixed(2).replace(".", ",")}
+                        Total:
+                        R$ ${Number(comprovante.total).toFixed(2).replace(".", ",")}
                     </p>
+
                 </div>
+
 
                 <div class="comprovante-secao">
-                <h2>Acompanhamento do pedido</h2>
 
-               ${gerarAcompanhamento(comprovante.status || "realizado")}
+                    <h2>Acompanhamento do pedido</h2>
 
-             </div>
-                    <p>Status atual do pedido:</p>
+                    ${gerarAcompanhamento(comprovante.status || "realizado")}
 
-                    <div class="etapas-pedido">
-
-                        <div class="etapa-pedido ativa">
-                            <span>✓</span>
-                            Pedido realizado
-                        </div>
-
-                        <div class="etapa-pedido">
-                            <span>2</span>
-                            Em preparação
-                        </div>
-
-                        <div class="etapa-pedido">
-                            <span>3</span>
-                            Enviado
-                        </div>
-
-                        <div class="etapa-pedido">
-                            <span>4</span>
-                            Entregue
-                        </div>
-
-                    </div>
                 </div>
+
 
                 <div class="botoes-comprovante">
 
@@ -336,71 +392,105 @@
         }
 
 
-function gerarAcompanhamento(status) {
+        // ========================================
+        // ACOMPANHAMENTO DO PEDIDO
+        // ========================================
 
-const etapas = [
-    {
-        id: "realizado",
-        nome: "Pedido realizado"
-    },
-    {
-        id: "preparacao",
-        nome: "Em preparação"
-    },
-    {
-        id: "enviado",
-        nome: "Enviado"
-    },
-    {
-        id: "entregue",
-        nome: "Entregue"
-    }
-];
+        function gerarAcompanhamento(status) {
 
-let indiceAtual = etapas.findIndex(
-    etapa => etapa.id === status
-);
+            const etapas = [
 
-if (indiceAtual === -1) {
-    indiceAtual = 0;
-}
+                {
+                    id: "realizado",
+                    nome: "Pedido realizado"
+                },
 
-let etapasHTML = "";
+                {
+                    id: "preparacao",
+                    nome: "Em preparação"
+                },
 
-etapas.forEach(function(etapa, indice) {
+                {
+                    id: "enviado",
+                    nome: "Enviado"
+                },
 
-    const classe = indice <= indiceAtual ? "ativa" : "";
+                {
+                    id: "entregue",
+                    nome: "Entregue"
+                }
 
-    const simbolo = indice < indiceAtual
-        ? "✓"
-        : indice + 1;
+            ];
 
-    etapasHTML += `
-        <div class="etapa-pedido ${classe}">
-            <span>${simbolo}</span>
-            ${etapa.nome}
-        </div>
-    `;
 
-});
+            let indiceAtual = etapas.findIndex(
+                etapa => etapa.id === status
+            );
 
-return `
-    <p>
-        <strong>Status atual:</strong>
-        ${etapas[indiceAtual].nome}
-    </p>
 
-    <div class="etapas-pedido">
-        ${etapasHTML}
-    </div>
-`;
-}
+            if (indiceAtual === -1) {
+                indiceAtual = 0;
+            }
+
+
+            let etapasHTML = "";
+
+
+            etapas.forEach(function(etapa, indice) {
+
+                const classe = indice <= indiceAtual
+                    ? "ativa"
+                    : "";
+
+                const simbolo = indice < indiceAtual
+                    ? "✓"
+                    : indice + 1;
+
+
+                etapasHTML += `
+
+                    <div class="etapa-pedido ${classe}">
+
+                        <span>${simbolo}</span>
+
+                        ${etapa.nome}
+
+                    </div>
+
+                `;
+
+            });
+
+
+            return `
+
+                <p>
+                    <strong>Status atual:</strong>
+                    ${etapas[indiceAtual].nome}
+                </p>
+
+                <div class="etapas-pedido">
+
+                    ${etapasHTML}
+
+                </div>
+
+            `;
+
+        }
+
+
+        // ========================================
+        // INICIAR PÁGINA
+        // ========================================
 
         document.addEventListener(
             "DOMContentLoaded",
             carregarComprovante
         );
+
     </script>
 
 </body>
+
 </html>
