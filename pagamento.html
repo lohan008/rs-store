@@ -2,308 +2,375 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Pagamento - RS Store</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
 </head>
+
 
 <body>
 
-    <header>
 
-        <div class="logo">
-            <h1>RS Store</h1>
+<header>
+
+    <div class="logo">
+
+        <h1>RS Store</h1>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Início
+        </a>
+
+        <a href="carrinho.html">
+            🛒 Carrinho
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<main>
+
+
+<section class="pagamento">
+
+
+    <h2>
+        Finalizar pedido
+    </h2>
+
+
+    <p class="texto-pagamento">
+
+        Confira os dados da entrega antes de escolher
+        a forma de pagamento.
+
+    </p>
+
+
+
+    <!-- DADOS DO CLIENTE -->
+
+    <form
+        id="formPagamento"
+        onsubmit="irParaConfirmacao(event)"
+    >
+
+
+        <label for="nome">
+            Nome completo
+        </label>
+
+        <input
+            type="text"
+            id="nome"
+            required
+        >
+
+
+
+        <label for="email">
+            E-mail
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            required
+        >
+
+
+
+        <label for="cep">
+            CEP
+        </label>
+
+        <input
+            type="text"
+            id="cep"
+            placeholder="00000-000"
+            required
+        >
+
+
+
+        <label for="endereco">
+            Endereço
+        </label>
+
+        <input
+            type="text"
+            id="endereco"
+            required
+        >
+
+
+
+        <label for="numero">
+            Número
+        </label>
+
+        <input
+            type="text"
+            id="numero"
+            required
+        >
+
+
+
+        <label for="bairro">
+            Bairro
+        </label>
+
+        <input
+            type="text"
+            id="bairro"
+            required
+        >
+
+
+
+        <label for="cidade">
+            Cidade
+        </label>
+
+        <input
+            type="text"
+            id="cidade"
+            required
+        >
+
+
+
+        <label for="estado">
+            Estado
+        </label>
+
+        <select
+            id="estado"
+            required
+        >
+
+            <option value="">
+                Selecione
+            </option>
+
+            <option value="SP">
+                São Paulo
+            </option>
+
+            <option value="RJ">
+                Rio de Janeiro
+            </option>
+
+            <option value="MG">
+                Minas Gerais
+            </option>
+
+            <option value="PR">
+                Paraná
+            </option>
+
+            <option value="ES">
+                Espírito Santo
+            </option>
+
+            <option value="SC">
+                Santa Catarina
+            </option>
+
+            <option value="RS">
+                Rio Grande do Sul
+            </option>
+
+            <option value="GO">
+                Goiás
+            </option>
+
+            <option value="MS">
+                Mato Grosso do Sul
+            </option>
+
+            <option value="MT">
+                Mato Grosso
+            </option>
+
+            <option value="BA">
+                Bahia
+            </option>
+
+            <option value="DF">
+                Distrito Federal
+            </option>
+
+            <option value="PE">
+                Pernambuco
+            </option>
+
+            <option value="CE">
+                Ceará
+            </option>
+
+            <option value="Outro">
+                Outro
+            </option>
+
+        </select>
+
+
+
+        <label for="complemento">
+            Complemento
+        </label>
+
+        <input
+            type="text"
+            id="complemento"
+            placeholder="Apartamento, bloco, etc."
+        >
+
+
+
+        <!-- FRETE -->
+
+        <div class="frete-pagamento">
+
+            <h3>
+                Entrega
+            </h3>
+
+
+            <p>
+                Frete:
+                R$ <span id="valorFrete">0,00</span>
+            </p>
+
+
+            <p id="prazoEntrega">
+                Selecione seu estado para calcular o prazo.
+            </p>
+
         </div>
 
-        <nav>
-            <a href="index.html">Início</a>
-            <a href="carrinho.html">🛒 Carrinho</a>
-        </nav>
 
-    </header>
 
+        <!-- RESUMO -->
 
-    <main>
+        <div class="resumo-pagamento">
 
-        <section class="pagamento">
+            <h3>
+                Resumo da compra
+            </h3>
 
-            <h2>Finalizar compra</h2>
 
+            <p>
+                Subtotal:
+                R$ <span id="subtotalPagamento">0,00</span>
+            </p>
 
-            <!-- =========================
-                 DADOS DO CLIENTE
-            ========================== -->
 
-            <h3>Dados pessoais</h3>
+            <p>
+                Desconto:
+                - R$ <span id="descontoPagamento">0,00</span>
+            </p>
 
-            <form id="formPagamento">
 
-                <label for="nome">
-                    Nome completo
-                </label>
+            <p>
+                Frete:
+                R$ <span id="fretePagamento">0,00</span>
+            </p>
 
-                <input
-                    type="text"
-                    id="nome"
-                    placeholder="Digite seu nome completo"
-                    required
-                >
 
+            <h3>
 
-                <label for="email">
-                    E-mail
-                </label>
+                Total:
+                R$ <span id="totalPagamento">0,00</span>
 
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Digite seu e-mail"
-                    required
-                >
+            </h3>
 
+        </div>
 
-                <!-- =========================
-                     ENDEREÇO DE ENTREGA
-                ========================== -->
-
-                <h3 class="titulo-entrega">
-                    Endereço de entrega
-                </h3>
-
-
-                <label for="cep">
-                    CEP
-                </label>
 
-                <input
-                    type="text"
-                    id="cep"
-                    placeholder="Ex.: 13300-000"
-                    maxlength="9"
-                    required
-                >
-
 
-                <label for="endereco">
-                    Rua
-                </label>
+        <!-- FORMA DE PAGAMENTO -->
 
-                <input
-                    type="text"
-                    id="endereco"
-                    placeholder="Digite sua rua"
-                    required
-                >
+        <label for="formaPagamento">
 
+            Forma de pagamento
 
-                <label for="numero">
-                    Número
-                </label>
+        </label>
 
-                <input
-                    type="text"
-                    id="numero"
-                    placeholder="Número da residência"
-                    required
-                >
 
+        <select
+            id="formaPagamento"
+            required
+        >
 
-                <label for="bairro">
-                    Bairro
-                </label>
+            <option value="">
+                Selecione uma opção
+            </option>
 
-                <input
-                    type="text"
-                    id="bairro"
-                    placeholder="Digite seu bairro"
-                    required
-                >
-
-
-                <label for="cidade">
-                    Cidade
-                </label>
-
-                <input
-                    type="text"
-                    id="cidade"
-                    placeholder="Digite sua cidade"
-                    required
-                >
-
-
-                <label for="estado">
-                    Estado
-                </label>
-
-                <select id="estado" required>
-
-                    <option value="">
-                        Selecione seu estado
-                    </option>
-
-                    <option value="AC">Acre - AC</option>
-                    <option value="AL">Alagoas - AL</option>
-                    <option value="AP">Amapá - AP</option>
-                    <option value="AM">Amazonas - AM</option>
-                    <option value="BA">Bahia - BA</option>
-                    <option value="CE">Ceará - CE</option>
-                    <option value="DF">Distrito Federal - DF</option>
-                    <option value="ES">Espírito Santo - ES</option>
-                    <option value="GO">Goiás - GO</option>
-                    <option value="MA">Maranhão - MA</option>
-                    <option value="MT">Mato Grosso - MT</option>
-                    <option value="MS">Mato Grosso do Sul - MS</option>
-                    <option value="MG">Minas Gerais - MG</option>
-                    <option value="PA">Pará - PA</option>
-                    <option value="PB">Paraíba - PB</option>
-                    <option value="PR">Paraná - PR</option>
-                    <option value="PE">Pernambuco - PE</option>
-                    <option value="PI">Piauí - PI</option>
-                    <option value="RJ">Rio de Janeiro - RJ</option>
-                    <option value="RN">Rio Grande do Norte - RN</option>
-                    <option value="RS">Rio Grande do Sul - RS</option>
-                    <option value="RO">Rondônia - RO</option>
-                    <option value="RR">Roraima - RR</option>
-                    <option value="SC">Santa Catarina - SC</option>
-                    <option value="SP">São Paulo - SP</option>
-                    <option value="SE">Sergipe - SE</option>
-                    <option value="TO">Tocantins - TO</option>
-
-                </select>
+            <option value="pix">
+                PIX
+            </option>
 
-
-                <label for="complemento">
-                    Complemento
-                </label>
+            <option value="cartao">
+                Cartão
+            </option>
 
-                <input
-                    type="text"
-                    id="complemento"
-                    placeholder="Apartamento, bloco, etc. (opcional)"
-                >
+            <option value="boleto">
+                Boleto
+            </option>
 
+        </select>
 
-                <!-- =========================
-                     INFORMAÇÕES DE ENTREGA
-                ========================== -->
 
-                <div class="frete-box">
 
-                    <h3>Entrega</h3>
+        <button
+            type="submit"
+        >
+            Continuar para pagamento
+        </button>
 
-                    <p>
-                        Loja de origem:
-                        <strong>Indaiatuba - SP</strong>
-                    </p>
 
-                    <p>
-                        Frete:
-                        R$ <span id="valorFrete">0,00</span>
-                    </p>
+    </form>
 
-                    <p id="prazoEntrega">
-                        Selecione seu estado para calcular o frete.
-                    </p>
 
-                </div>
+</section>
 
 
-                <!-- =========================
-                     RESUMO DA COMPRA
-                ========================== -->
+</main>
 
-                <div class="resumo-pagamento">
 
-                    <h3>Resumo da compra</h3>
+<footer>
 
-                    <p>
-                        Subtotal:
-                        R$ <span id="subtotalPagamento">0,00</span>
-                    </p>
+    <p>
+        © 2026 RS Store - Todos os direitos reservados.
+    </p>
 
-                    <p>
-                        Desconto:
-                        - R$ <span id="descontoPagamento">0,00</span>
-                    </p>
+</footer>
 
-                    <p>
-                        Frete:
-                        R$ <span id="fretePagamento">0,00</span>
-                    </p>
 
-                    <h3>
-                        Total:
-                        R$ <span id="totalPagamento">0,00</span>
-                    </h3>
-
-                </div>
-
-
-                <!-- =========================
-                     FORMA DE PAGAMENTO
-                ========================== -->
-
-                <h3 class="titulo-pagamento">
-                    Forma de pagamento
-                </h3>
-
-
-                <label for="formaPagamento">
-                    Escolha a forma de pagamento
-                </label>
-
-                <select
-                    id="formaPagamento"
-                    required
-                >
-
-                    <option value="">
-                        Selecione
-                    </option>
-
-                    <option value="pix">
-                        PIX
-                    </option>
-
-                    <option value="cartao">
-                        Cartão
-                    </option>
-
-                    <option value="boleto">
-                        Boleto
-                    </option>
-
-                </select>
-
-
-                <button type="submit">
-                    Finalizar compra
-                </button>
-
-            </form>
-
-
-            <div id="mensagemCompra"></div>
-
-        </section>
-
-    </main>
-
-
-    <footer>
-
-        <p>
-            © 2026 RS Store - Todos os direitos reservados.
-        </p>
-
-    </footer>
-
-
-    <script src="js/script.js"></script>
+<script src="js/script.js"></script>
 
 </body>
 
