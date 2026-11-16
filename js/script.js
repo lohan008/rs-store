@@ -2299,46 +2299,104 @@ function virarCartaoConfirmacao(virar) {
 
 function confirmarCompraFinal() {
 
-
     const mensagem =
         document.getElementById(
             "mensagemCompraConfirmacao"
         );
 
+    // Recuperar os dados antes de limpar o carrinho.
 
-    /*
-        Aqui sim o carrinho é apagado.
-    */
+    const produtos =
+        JSON.parse(
+            localStorage.getItem("carrinho")
+        ) || [];
 
-    localStorage.removeItem(
-        "carrinho"
+    const cliente =
+        JSON.parse(
+            localStorage.getItem("dadosCliente")
+        ) || {};
+
+    const formaPagamento =
+        localStorage.getItem("formaPagamento") || "";
+
+    // Calcular os valores da compra.
+
+    let subtotal = 0;
+
+    produtos.forEach(function(produto) {
+
+        subtotal +=
+            Number(produto.preco) *
+            Number(produto.quantidade || 1);
+
+    });
+
+    const percentualDesconto =
+        Number(
+            localStorage.getItem("descontoCupom")
+        ) || 0;
+
+    const valorDesconto =
+        subtotal * (percentualDesconto / 100);
+
+    let frete =
+        Number(
+            localStorage.getItem("freteAtual")
+        ) || 0;
+
+    if (
+        localStorage.getItem("freteGratis") === "true"
+    ) {
+        frete = 0;
+    }
+
+    const total =
+        subtotal - valorDesconto + frete;
+
+    // Gerar número do pedido.
+
+    const numeroPedido =
+        "RS" + Date.now().toString().slice(-8);
+
+    // Guardar comprovante completo.
+
+    const comprovante = {
+
+        numero: numeroPedido,
+
+        data: new Date().toLocaleDateString("pt-BR"),
+
+        produtos: produtos,
+
+        cliente: cliente,
+
+        pagamento: formaPagamento,
+
+        subtotal: subtotal,
+
+        desconto: valorDesconto,
+
+        frete: frete,
+
+        total: total
+
+    };
+
+    localStorage.setItem(
+        "comprovanteCompra",
+        JSON.stringify(comprovante)
     );
 
+    // Limpar dados da compra atual.
 
-    localStorage.removeItem(
-        "descontoCupom"
-    );
+    localStorage.removeItem("carrinho");
+    localStorage.removeItem("descontoCupom");
+    localStorage.removeItem("freteAtual");
+    localStorage.removeItem("freteGratis");
+    localStorage.removeItem("formaPagamento");
+    localStorage.removeItem("dadosCliente");
 
-
-    localStorage.removeItem(
-        "freteAtual"
-    );
-
-
-    localStorage.removeItem(
-        "freteGratis"
-    );
-
-
-    localStorage.removeItem(
-        "formaPagamento"
-    );
-
-
-    localStorage.removeItem(
-        "dadosCliente"
-    );
-
+    // Mostrar confirmação.
 
     if (mensagem) {
 
@@ -2350,20 +2408,19 @@ function confirmarCompraFinal() {
                     ✓
                 </div>
 
-                <h2>
-                    Compra finalizada!
-                </h2>
+                <h2>Compra finalizada!</h2>
+
+                <p>Seu pedido foi registrado com sucesso.</p>
 
                 <p>
-                    Seu pedido foi registrado com sucesso.
+                    Número do pedido:
+                    <strong>${numeroPedido}</strong>
                 </p>
 
-                <p>
-                    Obrigado por comprar na RS Store!
-                </p>
+                <p>Obrigado por comprar na RS Store!</p>
 
-                <a href="index.html">
-                    Voltar para a loja
+                <a href="comprovante.html">
+                    Ver comprovante e acompanhar pedido
                 </a>
 
             </div>
@@ -2372,21 +2429,16 @@ function confirmarCompraFinal() {
 
     }
 
-
-    /*
-        Desabilita o botão depois da compra.
-    */
+    // Esconder botão depois da compra.
 
     const botao =
         document.querySelector(
             ".btn-confirmar-compra"
         );
 
-
     if (botao) {
 
         botao.disabled = true;
-
         botao.style.display = "none";
 
     }

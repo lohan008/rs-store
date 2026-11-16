@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprovante - RS Store</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .pagina-comprovante {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 25px;
+        }
+
+        .comprovante-box {
+            background: #151515;
+            border: 1px solid #087cff;
+            border-radius: 12px;
+            padding: 30px;
+            color: white;
+            box-shadow: 0 0 15px #087cff55;
+        }
+
+        .comprovante-box h1,
+        .comprovante-box h2 {
+            color: #168cff;
+            margin-bottom: 15px;
+        }
+
+        .comprovante-secao {
+            border-bottom: 1px solid #333;
+            padding: 20px 0;
+        }
+
+        .comprovante-secao p {
+            margin: 8px 0;
+        }
+
+        .produto-comprovante {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 12px 0;
+        }
+
+        .total-comprovante {
+            color: #168cff;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .etapas-pedido {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .etapa-pedido {
+            flex: 1;
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+        }
+
+        .etapa-pedido span {
+            display: block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            background: #087cff;
+            color: white;
+        }
+
+        .etapa-pedido.ativa {
+            color: #168cff;
+            font-weight: bold;
+        }
+
+        .botoes-comprovante {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .botoes-comprovante a,
+        .botoes-comprovante button {
+            background: #087cff;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .sem-comprovante {
+            text-align: center;
+            padding: 40px 15px;
+        }
+
+        @media (max-width: 600px) {
+            .pagina-comprovante {
+                padding: 12px;
+            }
+
+            .comprovante-box {
+                padding: 18px;
+            }
+
+            .etapas-pedido {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .etapa-pedido {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .etapa-pedido span {
+                margin: 0;
+                flex-shrink: 0;
+            }
+        }
+
+        @media print {
+            header, .botoes-comprovante {
+                display: none !important;
+            }
+
+            body {
+                background: white !important;
+                color: black !important;
+            }
+
+            .comprovante-box {
+                background: white !important;
+                color: black !important;
+                box-shadow: none;
+                border: 1px solid #999;
+            }
+
+            .comprovante-box h1,
+            .comprovante-box h2,
+            .total-comprovante {
+                color: #087cff !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>RS Store</h1>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="index.html#produtos">Produtos</a>
+        </nav>
+    </header>
+
+    <main class="pagina-comprovante">
+
+        <div class="comprovante-box" id="conteudoComprovante">
+            <p>Carregando comprovante...</p>
+        </div>
+
+    </main>
+
+    <script>
+        function carregarComprovante() {
+
+            const area = document.getElementById(
+                "conteudoComprovante"
+            );
+
+            const comprovante = JSON.parse(
+                localStorage.getItem("comprovanteCompra")
+            );
+
+            if (!comprovante) {
+
+                area.innerHTML = `
+                    <div class="sem-comprovante">
+                        <h2>Nenhum comprovante encontrado</h2>
+                        <p>Finalize uma compra para visualizar seu comprovante.</p>
+                        <a href="index.html">Voltar para a loja</a>
+                    </div>
+                `;
+
+                return;
+            }
+
+            let produtosHTML = "";
+
+            comprovante.produtos.forEach(function(produto) {
+
+                const quantidade = Number(produto.quantidade) || 1;
+                const subtotalProduto =
+                    Number(produto.preco) * quantidade;
+
+                produtosHTML += `
+                    <div class="produto-comprovante">
+                        <span>
+                            ${produto.nome} (x${quantidade})
+                        </span>
+
+                        <strong>
+                            R$ ${subtotalProduto.toFixed(2).replace(".", ",")}
+                        </strong>
+                    </div>
+                `;
+
+            });
+
+            const cliente = comprovante.cliente || {};
+
+            area.innerHTML = `
+
+                <h1>Compra finalizada!</h1>
+
+                <p>Obrigado por comprar na RS Store.</p>
+
+                <div class="comprovante-secao">
+                    <h2>Dados do pedido</h2>
+
+                    <p>
+                        <strong>Número:</strong>
+                        ${comprovante.numero}
+                    </p>
+
+                    <p>
+                        <strong>Data:</strong>
+                        ${comprovante.data}
+                    </p>
+                </div>
+
+                <div class="comprovante-secao">
+                    <h2>Produtos comprados</h2>
+                    ${produtosHTML}
+                </div>
+
+                <div class="comprovante-secao">
+                    <h2>Dados do cliente</h2>
+
+                    <p><strong>Nome:</strong> ${cliente.nome || "Não informado"}</p>
+                    <p><strong>E-mail:</strong> ${cliente.email || "Não informado"}</p>
+                    <p>
+                        <strong>Endereço:</strong>
+                        ${cliente.endereco || ""}, ${cliente.numero || ""}
+                    </p>
+                    <p>
+                        <strong>Cidade:</strong>
+                        ${cliente.cidade || ""} - ${cliente.estado || ""}
+                    </p>
+                </div>
+
+                <div class="comprovante-secao">
+                    <h2>Pagamento</h2>
+
+                    <p>
+                        <strong>Forma de pagamento:</strong>
+                        ${comprovante.pagamento || "Não informado"}
+                    </p>
+                </div>
+
+                <div class="comprovante-secao">
+                    <h2>Resumo financeiro</h2>
+
+                    <p>Subtotal: R$ ${comprovante.subtotal.toFixed(2).replace(".", ",")}</p>
+
+                    <p>Desconto: R$ ${comprovante.desconto.toFixed(2).replace(".", ",")}</p>
+
+                    <p>Frete: R$ ${comprovante.frete.toFixed(2).replace(".", ",")}</p>
+
+                    <p class="total-comprovante">
+                        Total: R$ ${comprovante.total.toFixed(2).replace(".", ",")}
+                    </p>
+                </div>
+
+                <div class="comprovante-secao">
+                    <h2>Acompanhamento do pedido</h2>
+
+                    <p>Status demonstrativo do pedido:</p>
+
+                    <div class="etapas-pedido">
+
+                        <div class="etapa-pedido ativa">
+                            <span>✓</span>
+                            Pedido realizado
+                        </div>
+
+                        <div class="etapa-pedido">
+                            <span>2</span>
+                            Em preparação
+                        </div>
+
+                        <div class="etapa-pedido">
+                            <span>3</span>
+                            Enviado
+                        </div>
+
+                        <div class="etapa-pedido">
+                            <span>4</span>
+                            Entregue
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="botoes-comprovante">
+
+                    <button onclick="window.print()">
+                        Imprimir comprovante
+                    </button>
+
+                    <a href="index.html">
+                        Voltar para a loja
+                    </a>
+
+                </div>
+
+            `;
+
+        }
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            carregarComprovante
+        );
+    </script>
+
+</body>
+</html>
