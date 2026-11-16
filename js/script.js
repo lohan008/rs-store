@@ -2726,3 +2726,91 @@ function limparFiltros() {
     aplicarFiltros();
 
 }
+// ========================================
+// MOSTRAR PRODUTOS EM OFERTA
+// ========================================
+
+function mostrarOfertas(event) {
+
+    if (event) {
+        event.preventDefault();
+    }
+
+    // Limpa os filtros anteriores
+    document.getElementById("buscaProduto").value = "";
+    document.getElementById("filtroMarca").value = "";
+    document.getElementById("precoMinimo").value = "";
+    document.getElementById("precoMaximo").value = "";
+
+    categoriaSelecionada = "";
+
+    const produtos = document.querySelectorAll(".produto");
+
+    produtos.forEach(produto => {
+
+        if (produto.dataset.oferta === "sim") {
+            produto.style.display = "";
+        } else {
+            produto.style.display = "none";
+        }
+
+    });
+
+    document.getElementById("tituloProdutos").textContent = "Ofertas";
+
+    const totalOfertas = document.querySelectorAll(
+        '.produto[data-oferta="sim"]'
+    ).length;
+    
+    const contador = document.getElementById("contadorOfertas");
+    
+    contador.textContent = totalOfertas + " produtos em oferta";
+    
+    contador.style.display = "block";
+    
+    document.getElementById("produtos").scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+// ========================================
+// APLICAR DESCONTO NAS OFERTAS
+// ========================================
+
+document.querySelectorAll(".produto").forEach(produto => {
+
+    if (produto.dataset.oferta === "sim") {
+
+        const precoElemento = produto.querySelector("p");
+
+        const precoOriginal = parseFloat(
+            precoElemento.textContent
+                .replace("R$", "")
+                .replace(/\./g, "")
+                .replace(",", ".")
+                .trim()
+        );
+
+        const precoOferta = (precoOriginal * 0.85).toFixed(2);
+
+        const precoFormatado = Number(precoOferta).toLocaleString(
+            "pt-BR",
+            {
+                style: "currency",
+                currency: "BRL"
+            }
+        );
+
+        precoElemento.innerHTML = `
+            <span class="preco-antigo">
+                ${precoElemento.textContent}
+            </span>
+            <br>
+            <strong class="preco-oferta">
+                ${precoFormatado}
+            </strong>
+        `;
+
+    }
+
+});

@@ -1041,3 +1041,105 @@ footer {
     margin-top: 8px;
     font-weight: bold;
 }
+/* ========================================
+   AVALIAÇÕES DOS PRODUTOS
+======================================== */
+
+.avaliacao-produto {
+    margin-top: 15px;
+    padding: 12px;
+    background: #151515;
+    border-radius: 10px;
+}
+
+.avaliacao-produto p {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.avaliacao-produto textarea {
+    width: 100%;
+    min-height: 65px;
+    padding: 10px;
+    border: 1px solid #008cff;
+    border-radius: 6px;
+    background: #222;
+    color: white;
+    resize: vertical;
+}
+
+.avaliacao-produto button {
+    margin-top: 8px;
+    padding: 9px 14px;
+    background: #008cff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.avaliacao-produto button:hover {
+    background: #0066cc;
+}
+
+.avaliacao-item {
+    margin-top: 10px;
+    padding: 10px;
+    background: #222;
+    border-left: 3px solid #008cff;
+    border-radius: 5px;
+}
+
+.avaliacao-item p {
+    overflow-wrap: anywhere;
+}
+
+.avaliacao-item small {
+    color: #aaa;
+}
+/* ================================= */
+/* PREÇOS DAS OFERTAS */
+/* ================================= */
+
+.preco-antigo {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 14px;
+}
+
+.preco-oferta {
+    color: #00aaff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* ETIQUETA DE OFERTA */
+
+.produto[data-oferta="sim"] {
+    position: relative;
+}
+
+.produto[data-oferta="sim"]::before {
+    content: "OFERTA -15%";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #00aaff;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 2;
+}
+/* ================================= */
+/* CONTADOR DE OFERTAS */
+/* ================================= */
+
+#contadorOfertas {
+    color: #00aaff;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0 20px;
+    text-align: center;
+}
