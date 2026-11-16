@@ -287,9 +287,12 @@
                 </div>
 
                 <div class="comprovante-secao">
-                    <h2>Acompanhamento do pedido</h2>
+                <h2>Acompanhamento do pedido</h2>
 
-                    <p>Status demonstrativo do pedido:</p>
+               ${gerarAcompanhamento(comprovante.status || "realizado")}
+
+             </div>
+                    <p>Status atual do pedido:</p>
 
                     <div class="etapas-pedido">
 
@@ -331,6 +334,67 @@
             `;
 
         }
+
+
+function gerarAcompanhamento(status) {
+
+const etapas = [
+    {
+        id: "realizado",
+        nome: "Pedido realizado"
+    },
+    {
+        id: "preparacao",
+        nome: "Em preparação"
+    },
+    {
+        id: "enviado",
+        nome: "Enviado"
+    },
+    {
+        id: "entregue",
+        nome: "Entregue"
+    }
+];
+
+let indiceAtual = etapas.findIndex(
+    etapa => etapa.id === status
+);
+
+if (indiceAtual === -1) {
+    indiceAtual = 0;
+}
+
+let etapasHTML = "";
+
+etapas.forEach(function(etapa, indice) {
+
+    const classe = indice <= indiceAtual ? "ativa" : "";
+
+    const simbolo = indice < indiceAtual
+        ? "✓"
+        : indice + 1;
+
+    etapasHTML += `
+        <div class="etapa-pedido ${classe}">
+            <span>${simbolo}</span>
+            ${etapa.nome}
+        </div>
+    `;
+
+});
+
+return `
+    <p>
+        <strong>Status atual:</strong>
+        ${etapas[indiceAtual].nome}
+    </p>
+
+    <div class="etapas-pedido">
+        ${etapasHTML}
+    </div>
+`;
+}
 
         document.addEventListener(
             "DOMContentLoaded",

@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - RS Store</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .painel-admin {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .admin-box {
+            background: #151515;
+            border: 1px solid #087cff;
+            border-radius: 12px;
+            padding: 25px;
+            color: white;
+            box-shadow: 0 0 15px #087cff55;
+        }
+
+        .admin-box h1,
+        .admin-box h2 {
+            color: #168cff;
+            margin-bottom: 20px;
+        }
+
+        .pedido-admin {
+            background: #202020;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 18px;
+            margin-top: 15px;
+        }
+
+        .pedido-admin p {
+            margin: 10px 0;
+        }
+
+        .pedido-admin select {
+            background: #111;
+            color: white;
+            border: 1px solid #087cff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .pedido-admin button {
+            background: #087cff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+
+        .sem-pedidos {
+            text-align: center;
+            padding: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>RS Store</h1>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="comprovante.html">Comprovante</a>
+        </nav>
+    </header>
+
+    <main class="painel-admin">
+
+        <div class="admin-box">
+
+            <h1>Painel Administrativo</h1>
+
+            <p>Gerencie os pedidos realizados na RS Store.</p>
+
+            <div id="listaPedidos">
+                Carregando pedidos...
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+
+        function carregarPedidos() {
+
+            const lista = document.getElementById("listaPedidos");
+
+            const pedidos = JSON.parse(
+                localStorage.getItem("pedidosRSStore")
+            ) || [];
+
+            const ultimoComprovante = JSON.parse(
+                localStorage.getItem("comprovanteCompra")
+            );
+
+            if (
+                ultimoComprovante &&
+                !pedidos.some(p => p.numero === ultimoComprovante.numero)
+            ) {
+                ultimoComprovante.status =
+                    ultimoComprovante.status || "realizado";
+
+                pedidos.push(ultimoComprovante);
+
+                localStorage.setItem(
+                    "pedidosRSStore",
+                    JSON.stringify(pedidos)
+                );
+            }
+
+            if (pedidos.length === 0) {
+
+                lista.innerHTML = `
+                    <div class="sem-pedidos">
+                        <h2>Nenhum pedido encontrado</h2>
+                        <p>Quando uma compra for finalizada, ela aparecerá aqui.</p>
+                    </div>
+                `;
+
+                return;
+            }
+
+            lista.innerHTML = "";
+
+            pedidos.forEach(function(pedido, indice) {
+
+                const card = document.createElement("div");
+
+                card.className = "pedido-admin";
+
+                const nome = pedido.cliente?.nome || "Não informado";
+
+                card.innerHTML = `
+                    <h2>Pedido ${pedido.numero}</h2>
+
+                    <p><strong>Cliente:</strong> ${nome}</p>
+
+                    <p>
+                        <strong>Data:</strong>
+                        ${pedido.data}
+                    </p>
+
+                    <p>
+                        <strong>Total:</strong>
+                        R$ ${Number(pedido.total).toFixed(2).replace(".", ",")}
+                    </p>
+
+                    <p><strong>Status atual:</strong> ${pedido.status || "realizado"}</p>
+
+                    <label>Alterar status:</label><br>
+
+                    <select id="status-${indice}">
+                        <option value="realizado">Pedido realizado</option>
+                        <option value="preparacao">Em preparação</option>
+                        <option value="enviado">Enviado</option>
+                        <option value="entregue">Entregue</option>
+                    </select>
+
+                    <button onclick="atualizarStatus(${indice})">
+                        Salvar status
+                    </button>
+                `;
+
+                lista.appendChild(card);
+
+                card.querySelector("select").value =
+                    pedido.status || "realizado";
+
+            });
+
+        }
+
+        function atualizarStatus(indice) {
+
+            const pedidos = JSON.parse(
+                localStorage.getItem("pedidosRSStore")
+            ) || [];
+
+            const novoStatus = document.getElementById(
+                "status-" + indice
+            ).value;
+
+            pedidos[indice].status = novoStatus;
+
+            localStorage.setItem(
+                "pedidosRSStore",
+                JSON.stringify(pedidos)
+            );
+
+            const comprovante = JSON.parse(
+                localStorage.getItem("comprovanteCompra")
+            );
+
+            if (
+                comprovante &&
+                comprovante.numero === pedidos[indice].numero
+            ) {
+                comprovante.status = novoStatus;
+
+                localStorage.setItem(
+                    "comprovanteCompra",
+                    JSON.stringify(comprovante)
+                );
+            }
+
+            alert("Status do pedido atualizado!");
+
+            carregarPedidos();
+
+        }
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            carregarPedidos
+        );
+
+    </script>
+
+</body>
+</html>
