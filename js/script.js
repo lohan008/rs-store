@@ -2493,3 +2493,90 @@ function copiarBoletoConfirmacao() {
         });
 
 }
+// ========================================
+// SISTEMA DE AVALIAÇÕES
+// ========================================
+
+function avaliarProduto(nomeProduto) {
+
+    const produto = [...document.querySelectorAll(".produto")]
+        .find(item => item.querySelector("h3")?.textContent.trim() === nomeProduto);
+
+    if (!produto) return;
+
+    const comentario = produto.querySelector("textarea").value.trim();
+
+    if (comentario === "") {
+        alert("Escreva um comentário antes de enviar!");
+        return;
+    }
+
+    const campoNota = produto.querySelector(".nota-avaliacao");
+
+    const nota = campoNota ? Number(campoNota.value) : 5;
+
+    let avaliacoes = JSON.parse(localStorage.getItem("avaliacoesRS")) || {};
+
+    if (!avaliacoes[nomeProduto]) {
+        avaliacoes[nomeProduto] = [];
+    }
+
+    avaliacoes[nomeProduto].push({
+        comentario: comentario,
+        nota: nota,
+        data: new Date().toLocaleDateString("pt-BR")
+    });
+
+    localStorage.setItem("avaliacoesRS", JSON.stringify(avaliacoes));
+
+    produto.querySelector("textarea").value = "";
+
+    mostrarAvaliacoes(nomeProduto);
+}
+
+
+// ========================================
+// MOSTRAR AVALIAÇÕES
+// ========================================
+
+function mostrarAvaliacoes(nomeProduto) {
+
+    let avaliacoes = JSON.parse(localStorage.getItem("avaliacoesRS")) || {};
+
+    const produto = [...document.querySelectorAll(".produto")]
+        .find(item => item.querySelector("h3")?.textContent.trim() === nomeProduto);
+
+    if (!produto) return;
+
+    const lista = produto.querySelector(".lista-avaliacoes");
+
+    if (!lista) return;
+
+    lista.innerHTML = "";
+
+    (avaliacoes[nomeProduto] || []).forEach(avaliacao => {
+
+        lista.innerHTML += `
+            <div class="avaliacao-item">
+                <p>${"⭐".repeat(Number(avaliacao.nota || 5))}</p>
+                <p>${avaliacao.comentario}</p>
+                <small>${avaliacao.data}</small>
+            </div>
+        `;
+
+    });
+}
+
+
+// ========================================
+// CARREGAR AVALIAÇÕES AO ABRIR A LOJA
+// ========================================
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    document.querySelectorAll(".produto h3").forEach(titulo => {
+        mostrarAvaliacoes(titulo.textContent.trim());
+    });
+
+});
+
