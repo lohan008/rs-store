@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -26,8 +26,6 @@
             min-height: 100vh;
         }
 
-        /* MENU LATERAL */
-
         .sidebar {
             width: 250px;
             background: #0d131d;
@@ -37,6 +35,7 @@
             height: 100vh;
             left: 0;
             top: 0;
+            z-index: 10;
         }
 
         .logo {
@@ -119,8 +118,6 @@
             background: #142033;
         }
 
-        /* CONTEÚDO */
-
         .conteudo {
             width: calc(100% - 250px);
             margin-left: 250px;
@@ -173,8 +170,6 @@
             font-size: 13px;
             margin-top: 6px;
         }
-
-        /* CARTÕES */
 
         .cards {
             display: grid;
@@ -230,13 +225,12 @@
             font-size: 11px;
         }
 
-        /* PEDIDOS */
-
         .caixa {
             background: #101925;
             border: 1px solid #243448;
             border-radius: 13px;
             padding: 23px;
+            margin-bottom: 22px;
         }
 
         .pedidos-topo {
@@ -248,18 +242,32 @@
             margin-bottom: 22px;
         }
 
-        .pesquisa {
+        .pesquisa,
+        .campo,
+        .campo-select,
+        .campo-textarea {
             background: #0a111b;
             border: 1px solid #2b3d53;
             border-radius: 8px;
-            padding: 11px 14px;
+            padding: 12px 14px;
             color: white;
             outline: none;
-            width: 250px;
+            width: 100%;
         }
 
-        .pesquisa:focus {
+        .pesquisa {
+            width: 280px;
+        }
+
+        .pesquisa:focus,
+        .campo:focus,
+        .campo-select:focus,
+        .campo-textarea:focus {
             border-color: #008cff;
+        }
+
+        .campo-select option {
+            background: #101925;
         }
 
         .pedido-admin {
@@ -348,20 +356,23 @@
             box-shadow: 0 0 12px #087cff55;
         }
 
-        /* BOTÃO ARQUIVAR */
-
-        .botao-arquivar {
+        .botao-secundario {
             background: #26384c;
             border: 1px solid #42617f;
             color: #d5e8ff;
         }
 
-        .botao-arquivar:hover {
+        .botao-secundario:hover {
             background: #34516f;
-            box-shadow: 0 0 12px #087cff33;
         }
 
-        /* STATUS */
+        .botao-perigo {
+            background: #672b35;
+        }
+
+        .botao-perigo:hover {
+            background: #8b2636;
+        }
 
         .status {
             padding: 6px 11px;
@@ -402,31 +413,187 @@
             margin-bottom: 12px;
         }
 
-        /* ÁREAS FUTURAS */
+        /* FORMULÁRIO DE PRODUTOS */
 
-        .area-futura {
-            display: none;
-            background: #101925;
-            border: 1px solid #243448;
-            border-radius: 13px;
-            padding: 35px;
-            text-align: center;
+        .form-produto {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 17px;
         }
 
-        .area-futura h2 {
+        .campo-grupo {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .campo-grupo label {
+            color: #b8c7d9;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .campo-grupo.completo {
+            grid-column: 1 / -1;
+        }
+
+        .campo-textarea {
+            min-height: 85px;
+            resize: vertical;
+        }
+
+        .campo-ajuda {
+            color: #788ba2;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .acoes-formulario {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 5px;
+        }
+
+        .produto-admin {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            align-items: center;
+            gap: 17px;
+            background: #0b1420;
+            border: 1px solid #26394e;
+            border-radius: 11px;
+            padding: 15px;
             margin-bottom: 12px;
+        }
+
+        .produto-admin img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            background: #172435;
+            border-radius: 8px;
+        }
+
+        .produto-admin h3 {
+            font-size: 15px;
+            margin-bottom: 7px;
+        }
+
+        .produto-admin p {
+            color: #91a0b4;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .produto-admin-acoes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .produto-admin-acoes button {
+            padding: 9px 12px;
+            font-size: 12px;
+        }
+
+        .produto-inativo {
+            opacity: .55;
+        }
+
+        .etiqueta-ativo {
+            color: #55e39b !important;
+        }
+
+        .etiqueta-inativo {
+            color: #ff8d8d !important;
+        }
+
+        /* RELATÓRIOS */
+
+        .relatorio-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .relatorio-card {
+            background: linear-gradient(145deg, #121e2d, #0e1622);
+            border: 1px solid #23364b;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .relatorio-card p {
+            color: #91a0b4;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .relatorio-card h2 {
+            font-size: 23px;
             color: #36a6ff;
         }
 
-        .area-futura p {
-            color: #91a0b4;
-            line-height: 1.7;
+        .barra-relatorio {
+            margin: 17px 0;
         }
 
-        /* RESPONSIVIDADE */
+        .barra-relatorio-topo {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .barra-fundo {
+            width: 100%;
+            height: 10px;
+            background: #202e40;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .barra-preenchida {
+            height: 100%;
+            background: linear-gradient(90deg, #006eff, #26b5ff);
+            border-radius: 20px;
+            min-width: 2px;
+        }
+
+        .tabela-relatorio {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .tabela-relatorio th,
+        .tabela-relatorio td {
+            text-align: left;
+            padding: 13px 10px;
+            border-bottom: 1px solid #26394e;
+            font-size: 13px;
+        }
+
+        .tabela-relatorio th {
+            color: #36a6ff;
+        }
+
+        .tabela-relatorio td {
+            color: #c2cede;
+        }
+
+        .area-futura {
+            display: none;
+        }
 
         @media (max-width: 1100px) {
-            .cards {
+            .cards,
+            .relatorio-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -479,15 +646,36 @@
             .pedido-informacoes {
                 grid-template-columns: 1fr 1fr;
             }
+
+            .produto-admin {
+                grid-template-columns: 65px 1fr;
+            }
+
+            .produto-admin img {
+                width: 65px;
+                height: 65px;
+            }
+
+            .produto-admin-acoes {
+                grid-column: 1 / -1;
+                justify-content: flex-start;
+            }
         }
 
         @media (max-width: 480px) {
-            .cards {
+            .cards,
+            .relatorio-grid {
                 grid-template-columns: 1fr;
             }
 
-            .pedido-informacoes {
+            .pedido-informacoes,
+            .form-produto {
                 grid-template-columns: 1fr;
+            }
+
+            .campo-grupo.completo,
+            .acoes-formulario {
+                grid-column: auto;
             }
 
             .pesquisa {
@@ -497,6 +685,15 @@
             .pedidos-topo {
                 align-items: stretch;
             }
+
+            .tabela-relatorio {
+                font-size: 11px;
+            }
+
+            .tabela-relatorio th,
+            .tabela-relatorio td {
+                padding: 9px 5px;
+            }
         }
     </style>
 </head>
@@ -504,8 +701,6 @@
 <body>
 
 <div class="layout">
-
-    <!-- MENU LATERAL -->
 
     <aside class="sidebar">
 
@@ -550,8 +745,6 @@
         </div>
 
     </aside>
-
-    <!-- CONTEÚDO PRINCIPAL -->
 
     <main class="conteudo">
 
@@ -670,31 +863,174 @@
 
         </section>
 
-        <!-- PRODUTOS -->
+        <!-- GERENCIADOR DE PRODUTOS -->
 
-        <section id="produtos" class="area-futura">
+        <section id="produtos" class="secao" style="display:none;">
 
-            <h2>👕 Gerenciamento de produtos</h2>
+            <div class="caixa">
 
-            <p>
-                Nesta área vamos implementar o cadastro de produtos,
-                edição de informações, alteração de preços,
-                controle de estoque e exclusão de produtos.
-            </p>
+                <div class="pedidos-topo">
+                    <div>
+                        <h2 class="titulo-secao">Gerenciador de produtos</h2>
+                        <p class="subtitulo">
+                            Cadastre, edite, remova e controle os produtos da loja.
+                        </p>
+                    </div>
+                </div>
+
+                <form id="formProduto" class="form-produto">
+
+                    <input type="hidden" id="produtoId">
+
+                    <div class="campo-grupo">
+                        <label for="produtoNome">Nome do produto</label>
+                        <input class="campo" id="produtoNome"
+                            placeholder="Ex.: Camiseta Nike Preta" required>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="produtoMarca">Marca</label>
+                        <select class="campo-select" id="produtoMarca" required>
+                            <option value="">Selecione</option>
+                            <option>Nike</option>
+                            <option>Adidas</option>
+                            <option>Tommy Hilfiger</option>
+                            <option>Quiksilver</option>
+                            <option>Lacoste</option>
+                            <option>Louis Vuitton</option>
+                            <option>Sem marca</option>
+                        </select>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="produtoCategoria">Categoria</label>
+                        <select class="campo-select" id="produtoCategoria" required>
+                            <option value="">Selecione</option>
+                            <option value="camiseta">Camiseta</option>
+                            <option value="calca">Calça</option>
+                            <option value="moletom">Moletom</option>
+                            <option value="short">Short</option>
+                            <option value="bone">Boné</option>
+                        </select>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="produtoPreco">Preço (R$)</label>
+                        <input class="campo" id="produtoPreco"
+                            type="number" min="0.01" step="0.01"
+                            placeholder="99.90" required>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="produtoOferta">Preço promocional (opcional)</label>
+                        <input class="campo" id="produtoOferta"
+                            type="number" min="0.01" step="0.01"
+                            placeholder="Deixe vazio se não houver oferta">
+                        <span class="campo-ajuda">
+                            O preço promocional deve ser menor que o preço normal.
+                        </span>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="produtoImagem">Caminho da imagem</label>
+                        <input class="campo" id="produtoImagem"
+                            placeholder="img/camiseta.jpg" required>
+                        <span class="campo-ajuda">
+                            Informe o caminho da imagem que já está na pasta img.
+                        </span>
+                    </div>
+
+                    <div class="campo-grupo completo">
+                        <label for="produtoDescricao">Descrição (opcional)</label>
+                        <textarea class="campo-textarea" id="produtoDescricao"
+                            placeholder="Descreva o produto..."></textarea>
+                    </div>
+
+                    <div class="acoes-formulario">
+                        <button type="submit" class="botao" id="botaoSalvarProduto">
+                            + Cadastrar produto
+                        </button>
+
+                        <button type="button" class="botao botao-secundario"
+                            onclick="limparFormularioProduto()">
+                            Limpar formulário
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="caixa">
+
+                <div class="pedidos-topo">
+                    <div>
+                        <h2 class="titulo-secao">Produtos cadastrados</h2>
+                        <p class="subtitulo" id="contadorProdutos">
+                            0 produtos cadastrados
+                        </p>
+                    </div>
+
+                    <input
+                        type="text"
+                        id="pesquisaProdutoAdmin"
+                        class="pesquisa"
+                        placeholder="Pesquisar produto..."
+                        oninput="carregarProdutosAdmin()"
+                    >
+                </div>
+
+                <div id="listaProdutosAdmin"></div>
+
+            </div>
 
         </section>
 
         <!-- RELATÓRIOS -->
 
-        <section id="relatorios" class="area-futura">
+        <section id="relatorios" class="secao" style="display:none;">
 
-            <h2>📊 Relatórios da loja</h2>
+            <div class="relatorio-grid">
 
-            <p>
-                Nesta área vamos criar gráficos de vendas,
-                produtos mais vendidos, faturamento e
-                acompanhamento dos resultados da RS Store.
-            </p>
+                <div class="relatorio-card">
+                    <p>Faturamento total</p>
+                    <h2 id="relatorioFaturamento">R$ 0,00</h2>
+                </div>
+
+                <div class="relatorio-card">
+                    <p>Total de pedidos</p>
+                    <h2 id="relatorioPedidos">0</h2>
+                </div>
+
+                <div class="relatorio-card">
+                    <p>Unidades vendidas</p>
+                    <h2 id="relatorioUnidades">0</h2>
+                </div>
+
+                <div class="relatorio-card">
+                    <p>Ticket médio</p>
+                    <h2 id="relatorioTicket">R$ 0,00</h2>
+                </div>
+
+            </div>
+
+            <div class="caixa">
+                <h2 class="titulo-secao">🏆 Produtos mais vendidos</h2>
+                <p class="subtitulo">
+                    Ranking calculado a partir dos pedidos registrados.
+                </p>
+
+                <div id="graficoProdutos"></div>
+            </div>
+
+            <div class="caixa">
+                <h2 class="titulo-secao">Histórico de vendas</h2>
+                <p class="subtitulo">
+                    Inclui pedidos ativos e pedidos arquivados.
+                </p>
+
+                <div id="tabelaVendas"></div>
+            </div>
 
         </section>
 
@@ -704,29 +1040,74 @@
 
 <script>
 
-    // OBTER PEDIDOS E EVITAR RECUPERAR PEDIDOS ARQUIVADOS
+    // ========================================
+    // FUNÇÕES GERAIS
+    // ========================================
+
+    function formatarDinheiro(valor) {
+        return Number(valor || 0).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
+    }
+
+    function escaparHTML(valor) {
+        return String(valor ?? "").replace(/[&<>"']/g, caractere => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        })[caractere]);
+    }
+
+    function lerLista(chave) {
+        try {
+            const dados = JSON.parse(localStorage.getItem(chave));
+            return Array.isArray(dados) ? dados : [];
+        } catch {
+            return [];
+        }
+    }
+
+    function nomeStatus(status) {
+        const nomes = {
+            realizado: "Realizado",
+            preparacao: "Em preparação",
+            enviado: "Enviado",
+            entregue: "Entregue"
+        };
+
+        return nomes[status] || "Realizado";
+    }
+
+
+    // ========================================
+    // PEDIDOS
+    // ========================================
 
     function obterPedidos() {
 
-        let pedidos = JSON.parse(
-            localStorage.getItem("pedidosRSStore")
-        ) || [];
+        let pedidos = lerLista("pedidosRSStore");
+        let arquivados = lerLista("pedidosArquivadosRSStore");
 
-        let arquivados = JSON.parse(
-            localStorage.getItem("pedidosArquivadosRSStore")
-        ) || [];
+        let comprovante = null;
 
-        let comprovante = JSON.parse(
-            localStorage.getItem("comprovanteCompra")
-        );
+        try {
+            comprovante = JSON.parse(
+                localStorage.getItem("comprovanteCompra")
+            );
+        } catch {
+            comprovante = null;
+        }
 
         if (comprovante && comprovante.numero) {
 
-            let existeAtivo = pedidos.some(
+            const existeAtivo = pedidos.some(
                 pedido => pedido.numero === comprovante.numero
             );
 
-            let existeArquivado = arquivados.some(
+            const existeArquivado = arquivados.some(
                 pedido => pedido.numero === comprovante.numero
             );
 
@@ -740,7 +1121,6 @@
                     "pedidosRSStore",
                     JSON.stringify(pedidos)
                 );
-
             }
         }
 
@@ -748,112 +1128,78 @@
     }
 
 
-    // FORMATAR DINHEIRO
+    // ========================================
+    // HISTÓRICO COMPLETO SEM DUPLICAR PEDIDOS
+    // ========================================
 
-    function formatarDinheiro(valor) {
+    function obterTodosPedidos() {
 
-        return Number(valor || 0).toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL"
+        const ativos = obterPedidos();
+        const arquivados = lerLista("pedidosArquivadosRSStore");
+
+        const todos = [...ativos];
+
+        arquivados.forEach(pedido => {
+            if (!todos.some(item => item.numero === pedido.numero)) {
+                todos.push(pedido);
+            }
         });
 
+        return todos;
     }
 
 
-    // PROTEGER TEXTOS EXIBIDOS NO HTML
-
-    function escaparHTML(valor) {
-
-        return String(valor ?? "").replace(/[&<>"']/g, caractere => ({
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#039;"
-        })[caractere]);
-
-    }
-
-
-    // NOME DOS STATUS
-
-    function nomeStatus(status) {
-
-        const nomes = {
-            realizado: "Realizado",
-            preparacao: "Em preparação",
-            enviado: "Enviado",
-            entregue: "Entregue"
-        };
-
-        return nomes[status] || "Realizado";
-
-    }
-
-
-    // ATUALIZAR DASHBOARD
+    // ========================================
+    // DASHBOARD
+    // ========================================
 
     function atualizarDashboard() {
 
-        let pedidos = obterPedidos();
+        const pedidos = obterPedidos();
+        const todos = obterTodosPedidos();
 
-        let arquivados = JSON.parse(
-            localStorage.getItem("pedidosArquivadosRSStore")
-        ) || [];
-
-        let total = pedidos.length;
-
-        let preparacao = pedidos.filter(
+        const preparacao = pedidos.filter(
             pedido => pedido.status === "preparacao"
         ).length;
 
-        let entregues = pedidos.filter(
+        const entregues = pedidos.filter(
             pedido => pedido.status === "entregue"
         ).length;
 
-        let faturamentoAtivo = pedidos.reduce(
+        const faturamento = todos.reduce(
             (soma, pedido) => soma + Number(pedido.total || 0),
             0
         );
 
-        let faturamentoArquivado = arquivados.reduce(
-            (soma, pedido) => soma + Number(pedido.total || 0),
-            0
-        );
+        document.getElementById("totalPedidos").textContent =
+            pedidos.length;
 
-        let faturamento = faturamentoAtivo + faturamentoArquivado;
+        document.getElementById("pedidosPreparacao").textContent =
+            preparacao;
 
-        document.getElementById("totalPedidos").textContent = total;
-
-        document.getElementById("pedidosPreparacao").textContent = preparacao;
-
-        document.getElementById("pedidosEntregues").textContent = entregues;
+        document.getElementById("pedidosEntregues").textContent =
+            entregues;
 
         document.getElementById("faturamento").textContent =
             formatarDinheiro(faturamento);
 
-        let recentes = pedidos.slice().reverse().slice(0, 3);
-
-        let areaRecentes = document.getElementById("pedidosRecentes");
+        const recentes = pedidos.slice().reverse().slice(0, 3);
+        const areaRecentes = document.getElementById("pedidosRecentes");
 
         if (recentes.length === 0) {
-
             areaRecentes.innerHTML = `
                 <div class="sem-pedidos">
                     <div>📭</div>
                     <p>Nenhum pedido ativo encontrado.</p>
                 </div>
             `;
-
             return;
         }
 
         areaRecentes.innerHTML = recentes.map(pedido => `
-
             <div class="pedido-admin">
 
                 <div class="pedido-cabecalho">
-
                     <span class="pedido-numero">
                         Pedido #${escaparHTML(pedido.numero)}
                     </span>
@@ -861,7 +1207,6 @@
                     <span class="pedido-data">
                         ${escaparHTML(pedido.data || "Data não informada")}
                     </span>
-
                 </div>
 
                 <div class="pedido-informacoes">
@@ -886,27 +1231,26 @@
                     </div>
 
                 </div>
-
             </div>
-
         `).join("");
-
     }
 
 
-    // CARREGAR PEDIDOS
+    // ========================================
+    // LISTAR PEDIDOS
+    // ========================================
 
     function carregarPedidos() {
 
-        let pedidos = obterPedidos();
+        const pedidos = obterPedidos();
+        const lista = document.getElementById("listaPedidos");
+        const pesquisa = document.getElementById("pesquisaPedido");
 
-        let lista = document.getElementById("listaPedidos");
+        const termo = pesquisa
+            ? pesquisa.value.toLowerCase()
+            : "";
 
-        let pesquisa = document.getElementById("pesquisaPedido");
-
-        let termo = pesquisa ? pesquisa.value.toLowerCase() : "";
-
-        let pedidosFiltrados = pedidos
+        const filtrados = pedidos
             .map((pedido, indice) => ({
                 ...pedido,
                 indiceOriginal: indice
@@ -914,41 +1258,30 @@
             .reverse()
             .filter(pedido => {
 
-                let numero = String(
-                    pedido.numero || ""
-                ).toLowerCase();
+                const numero = String(pedido.numero || "").toLowerCase();
+                const cliente = String(pedido.cliente?.nome || "").toLowerCase();
 
-                let cliente = String(
-                    pedido.cliente?.nome || ""
-                ).toLowerCase();
-
-                return numero.includes(termo) ||
-                    cliente.includes(termo);
-
+                return numero.includes(termo) || cliente.includes(termo);
             });
 
-        if (pedidosFiltrados.length === 0) {
-
+        if (filtrados.length === 0) {
             lista.innerHTML = `
                 <div class="sem-pedidos">
                     <div>📭</div>
                     <p>Nenhum pedido encontrado.</p>
                 </div>
             `;
-
             return;
         }
 
-        lista.innerHTML = pedidosFiltrados.map(pedido => {
+        lista.innerHTML = filtrados.map(pedido => {
 
-            let status = pedido.status || "realizado";
+            const status = pedido.status || "realizado";
 
             return `
-
                 <div class="pedido-admin">
 
                     <div class="pedido-cabecalho">
-
                         <span class="pedido-numero">
                             Pedido #${escaparHTML(pedido.numero)}
                         </span>
@@ -956,7 +1289,6 @@
                         <span class="pedido-data">
                             ${escaparHTML(pedido.data || "Data não informada")}
                         </span>
-
                     </div>
 
                     <div class="pedido-informacoes">
@@ -977,9 +1309,7 @@
 
                         <div class="info-item">
                             <small>Valor total</small>
-                            <strong>
-                                ${formatarDinheiro(pedido.total)}
-                            </strong>
+                            <strong>${formatarDinheiro(pedido.total)}</strong>
                         </div>
 
                     </div>
@@ -991,7 +1321,6 @@
                         </span>
 
                         <select id="status-${pedido.indiceOriginal}">
-
                             <option value="realizado"
                                 ${status === "realizado" ? "selected" : ""}>
                                 Realizado
@@ -1011,93 +1340,85 @@
                                 ${status === "entregue" ? "selected" : ""}>
                                 Entregue
                             </option>
-
                         </select>
 
-                        <button
-                            class="botao"
-                            onclick="atualizarStatus(${pedido.indiceOriginal})"
-                        >
+                        <button class="botao"
+                            onclick="atualizarStatus(${pedido.indiceOriginal})">
                             Salvar status
                         </button>
 
                         ${status === "entregue" ? `
-
-                            <button
-                                class="botao botao-arquivar"
-                                onclick="arquivarPedido(${pedido.indiceOriginal})"
-                            >
+                            <button class="botao botao-secundario"
+                                onclick="arquivarPedido(${pedido.indiceOriginal})">
                                 📥 Arquivar pedido
                             </button>
-
                         ` : ""}
 
                     </div>
 
                 </div>
-
             `;
-
         }).join("");
-
     }
 
 
+    // ========================================
     // ATUALIZAR STATUS
+    // ========================================
 
     function atualizarStatus(indice) {
 
-        let pedidos = obterPedidos();
-
-        let seletor = document.getElementById(
-            "status-" + indice
-        );
+        const pedidos = obterPedidos();
+        const seletor = document.getElementById("status-" + indice);
 
         if (!pedidos[indice] || !seletor) {
             alert("Pedido não encontrado.");
             return;
         }
 
-        let novoStatus = seletor.value;
-
-        pedidos[indice].status = novoStatus;
+        pedidos[indice].status = seletor.value;
 
         localStorage.setItem(
             "pedidosRSStore",
             JSON.stringify(pedidos)
         );
 
-        let comprovante = JSON.parse(
-            localStorage.getItem("comprovanteCompra")
-        );
+        let comprovante = null;
+
+        try {
+            comprovante = JSON.parse(
+                localStorage.getItem("comprovanteCompra")
+            );
+        } catch {
+            comprovante = null;
+        }
 
         if (
             comprovante &&
             comprovante.numero === pedidos[indice].numero
         ) {
-
-            comprovante.status = novoStatus;
+            comprovante.status = seletor.value;
 
             localStorage.setItem(
                 "comprovanteCompra",
                 JSON.stringify(comprovante)
             );
-
         }
 
         atualizarDashboard();
         carregarPedidos();
 
         alert("Status do pedido atualizado!");
-
     }
 
 
-    // ARQUIVAR PEDIDO ENTREGUE
+    // ========================================
+    // ARQUIVAR PEDIDO
+    // ========================================
 
     function arquivarPedido(indice) {
 
-        let pedidos = obterPedidos();
+        const pedidos = obterPedidos();
 
         if (!pedidos[indice]) {
             alert("Pedido não encontrado.");
@@ -1109,33 +1430,22 @@
             return;
         }
 
-        let confirmacao = confirm(
+        if (!confirm(
             "Deseja arquivar este pedido? Ele sairá da lista principal, mas continuará salvo no histórico."
-        );
-
-        if (!confirmacao) {
+        )) {
             return;
         }
 
-        let arquivados = JSON.parse(
-            localStorage.getItem("pedidosArquivadosRSStore")
-        ) || [];
-
-        let pedido = pedidos[indice];
-
-        // Registra a data do arquivamento.
+        const arquivados = lerLista("pedidosArquivadosRSStore");
+        const pedido = pedidos[indice];
 
         pedido.arquivadoEm = new Date().toLocaleString("pt-BR");
 
-        // Guarda o pedido no histórico de arquivados.
-
-        arquivados.push(pedido);
-
-        // Retira o pedido da lista principal.
+        if (!arquivados.some(item => item.numero === pedido.numero)) {
+            arquivados.push(pedido);
+        }
 
         pedidos.splice(indice, 1);
-
-        // Salva as duas listas separadamente.
 
         localStorage.setItem(
             "pedidosArquivadosRSStore",
@@ -1151,18 +1461,478 @@
         carregarPedidos();
 
         alert("Pedido arquivado com sucesso!");
-
     }
 
 
-    // NAVEGAÇÃO ENTRE AS SEÇÕES
+    // ========================================
+    // PRODUTOS - ARMAZENAMENTO
+    // ========================================
+
+    function obterProdutosAdmin() {
+        return lerLista("produtosRSStore");
+    }
+
+    function salvarProdutosAdmin(produtos) {
+        localStorage.setItem(
+            "produtosRSStore",
+            JSON.stringify(produtos)
+        );
+    }
+
+
+    // ========================================
+    // CADASTRAR OU EDITAR PRODUTO
+    // ========================================
+
+    document.getElementById("formProduto").addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+            const id = document.getElementById("produtoId").value;
+
+            const nome = document.getElementById("produtoNome").value.trim();
+            const marca = document.getElementById("produtoMarca").value;
+            const categoria = document.getElementById("produtoCategoria").value;
+            const preco = Number(document.getElementById("produtoPreco").value);
+            const precoOfertaTexto = document.getElementById("produtoOferta").value;
+            const imagem = document.getElementById("produtoImagem").value.trim();
+            const descricao = document.getElementById("produtoDescricao").value.trim();
+
+            const precoOferta = precoOfertaTexto === ""
+                ? null
+                : Number(precoOfertaTexto);
+
+            if (!nome || !marca || !categoria || !imagem || preco <= 0) {
+                alert("Preencha corretamente todos os campos obrigatórios.");
+                return;
+            }
+
+            if (
+                precoOferta !== null &&
+                (precoOferta <= 0 || precoOferta >= preco)
+            ) {
+                alert("O preço promocional precisa ser maior que zero e menor que o preço normal.");
+                return;
+            }
+
+            const produtos = obterProdutosAdmin();
+
+            if (id) {
+
+                const indice = produtos.findIndex(
+                    produto => String(produto.id) === String(id)
+                );
+
+                if (indice === -1) {
+                    alert("Produto não encontrado.");
+                    return;
+                }
+
+                produtos[indice] = {
+                    ...produtos[indice],
+                    nome,
+                    marca,
+                    categoria,
+                    preco,
+                    precoOferta,
+                    imagem,
+                    descricao
+                };
+
+                alert("Produto atualizado com sucesso!");
+
+            } else {
+
+                produtos.push({
+                    id: "prod-" + Date.now(),
+                    nome,
+                    marca,
+                    categoria,
+                    preco,
+                    precoOferta,
+                    imagem,
+                    descricao,
+                    ativo: true,
+                    criadoEm: new Date().toLocaleDateString("pt-BR")
+                });
+
+                alert("Produto cadastrado com sucesso!");
+            }
+
+            salvarProdutosAdmin(produtos);
+
+            limparFormularioProduto();
+            carregarProdutosAdmin();
+        }
+    );
+
+
+    // ========================================
+    // LIMPAR FORMULÁRIO
+    // ========================================
+
+    function limparFormularioProduto() {
+
+        document.getElementById("formProduto").reset();
+        document.getElementById("produtoId").value = "";
+
+        document.getElementById("botaoSalvarProduto").textContent =
+            "+ Cadastrar produto";
+    }
+
+
+    // ========================================
+    // LISTAR PRODUTOS CADASTRADOS
+    // ========================================
+
+    function carregarProdutosAdmin() {
+
+        const produtos = obterProdutosAdmin();
+        const lista = document.getElementById("listaProdutosAdmin");
+        const pesquisa = document.getElementById("pesquisaProdutoAdmin");
+
+        const termo = pesquisa
+            ? pesquisa.value.toLowerCase()
+            : "";
+
+        const filtrados = produtos.filter(produto =>
+            String(produto.nome || "").toLowerCase().includes(termo) ||
+            String(produto.marca || "").toLowerCase().includes(termo) ||
+            String(produto.categoria || "").toLowerCase().includes(termo)
+        );
+
+        document.getElementById("contadorProdutos").textContent =
+            produtos.length + (produtos.length === 1
+                ? " produto cadastrado"
+                : " produtos cadastrados");
+
+        if (filtrados.length === 0) {
+            lista.innerHTML = `
+                <div class="sem-pedidos">
+                    <div>👕</div>
+                    <p>Nenhum produto encontrado.</p>
+                    <small>Cadastre um produto no formulário acima.</small>
+                </div>
+            `;
+            return;
+        }
+
+        lista.innerHTML = filtrados.map(produto => {
+
+            const ativo = produto.ativo !== false;
+
+            return `
+                <div class="produto-admin ${ativo ? "" : "produto-inativo"}">
+
+                    <img
+                        src="${escaparHTML(produto.imagem)}"
+                        alt="${escaparHTML(produto.nome)}"
+                        onerror="this.style.opacity='.25'; this.alt='Imagem indisponível';"
+                    >
+
+                    <div>
+                        <h3>${escaparHTML(produto.nome)}</h3>
+
+                        <p>
+                            ${escaparHTML(produto.marca)} •
+                            ${escaparHTML(produto.categoria)}
+                        </p>
+
+                        <p>
+                            ${produto.precoOferta
+                                ? `<s>${formatarDinheiro(produto.preco)}</s>
+                                   <strong>${formatarDinheiro(produto.precoOferta)}</strong>`
+                                : `<strong>${formatarDinheiro(produto.preco)}</strong>`
+                            }
+                        </p>
+
+                        <p class="${ativo ? "etiqueta-ativo" : "etiqueta-inativo"}">
+                            ${ativo ? "● Produto ativo na loja" : "● Produto desativado"}
+                        </p>
+                    </div>
+
+                    <div class="produto-admin-acoes">
+
+                        <button class="botao"
+                            onclick="editarProduto('${escaparHTML(produto.id)}')">
+                            ✏️ Editar
+                        </button>
+
+                        <button class="botao botao-secundario"
+                            onclick="alternarProduto('${escaparHTML(produto.id)}')">
+                            ${ativo ? "Desativar" : "Ativar"}
+                        </button>
+
+                        <button class="botao botao-perigo"
+                            onclick="excluirProduto('${escaparHTML(produto.id)}')">
+                            🗑 Excluir
+                        </button>
+
+                    </div>
+
+                </div>
+            `;
+        }).join("");
+    }
+
+
+    // ========================================
+    // EDITAR PRODUTO
+    // ========================================
+
+    function editarProduto(id) {
+
+        const produtos = obterProdutosAdmin();
+
+        const produto = produtos.find(
+            item => String(item.id) === String(id)
+        );
+
+        if (!produto) {
+            alert("Produto não encontrado.");
+            return;
+        }
+
+        document.getElementById("produtoId").value = produto.id;
+        document.getElementById("produtoNome").value = produto.nome;
+        document.getElementById("produtoMarca").value = produto.marca;
+        document.getElementById("produtoCategoria").value = produto.categoria;
+        document.getElementById("produtoPreco").value = produto.preco;
+        document.getElementById("produtoOferta").value =
+            produto.precoOferta || "";
+        document.getElementById("produtoImagem").value = produto.imagem;
+        document.getElementById("produtoDescricao").value =
+            produto.descricao || "";
+
+        document.getElementById("botaoSalvarProduto").textContent =
+            "Salvar alterações";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+
+    // ========================================
+    // ATIVAR OU DESATIVAR PRODUTO
+    // ========================================
+
+    function alternarProduto(id) {
+
+        const produtos = obterProdutosAdmin();
+
+        const indice = produtos.findIndex(
+            produto => String(produto.id) === String(id)
+        );
+
+        if (indice === -1) {
+            alert("Produto não encontrado.");
+            return;
+        }
+
+        produtos[indice].ativo =
+            produtos[indice].ativo === false;
+
+        salvarProdutosAdmin(produtos);
+        carregarProdutosAdmin();
+    }
+
+
+    // ========================================
+    // EXCLUIR PRODUTO
+    // ========================================
+
+    function excluirProduto(id) {
+
+        if (!confirm(
+            "Tem certeza que deseja excluir este produto? Essa ação não poderá ser desfeita."
+        )) {
+            return;
+        }
+
+        let produtos = obterProdutosAdmin();
+
+        produtos = produtos.filter(
+            produto => String(produto.id) !== String(id)
+        );
+
+        salvarProdutosAdmin(produtos);
+
+        carregarProdutosAdmin();
+
+        alert("Produto excluído.");
+    }
+
+
+    // ========================================
+    // RELATÓRIOS
+    // ========================================
+
+    function atualizarRelatorios() {
+
+        const pedidos = obterTodosPedidos();
+
+        let faturamento = 0;
+        let unidades = 0;
+
+        const vendasPorProduto = {};
+
+        pedidos.forEach(pedido => {
+
+            faturamento += Number(pedido.total || 0);
+
+            (pedido.produtos || []).forEach(produto => {
+
+                const quantidade = Number(produto.quantidade || 1);
+                const nome = produto.nome || "Produto sem nome";
+
+                unidades += quantidade;
+
+                if (!vendasPorProduto[nome]) {
+                    vendasPorProduto[nome] = {
+                        quantidade: 0,
+                        valor: 0
+                    };
+                }
+
+                vendasPorProduto[nome].quantidade += quantidade;
+
+                vendasPorProduto[nome].valor +=
+                    Number(produto.preco || 0) * quantidade;
+            });
+        });
+
+        const quantidadePedidos = pedidos.length;
+
+        const ticketMedio = quantidadePedidos > 0
+            ? faturamento / quantidadePedidos
+            : 0;
+
+        document.getElementById("relatorioFaturamento").textContent =
+            formatarDinheiro(faturamento);
+
+        document.getElementById("relatorioPedidos").textContent =
+            quantidadePedidos;
+
+        document.getElementById("relatorioUnidades").textContent =
+            unidades;
+
+        document.getElementById("relatorioTicket").textContent =
+            formatarDinheiro(ticketMedio);
+
+
+        // RANKING DE PRODUTOS
+
+        const ranking = Object.entries(vendasPorProduto)
+            .map(([nome, dados]) => ({
+                nome,
+                quantidade: dados.quantidade,
+                valor: dados.valor
+            }))
+            .sort((a, b) => b.quantidade - a.quantidade);
+
+        const grafico = document.getElementById("graficoProdutos");
+
+        if (ranking.length === 0) {
+
+            grafico.innerHTML = `
+                <div class="sem-pedidos">
+                    <div>📊</div>
+                    <p>Ainda não existem vendas suficientes para montar o ranking.</p>
+                </div>
+            `;
+
+        } else {
+
+            const maiorQuantidade = ranking[0].quantidade;
+
+            grafico.innerHTML = ranking.slice(0, 8).map(item => {
+
+                const porcentagem =
+                    (item.quantidade / maiorQuantidade) * 100;
+
+                return `
+                    <div class="barra-relatorio">
+
+                        <div class="barra-relatorio-topo">
+                            <strong>${escaparHTML(item.nome)}</strong>
+                            <span>${item.quantidade} unidades</span>
+                        </div>
+
+                        <div class="barra-fundo">
+                            <div class="barra-preenchida"
+                                style="width:${porcentagem}%">
+                            </div>
+                        </div>
+
+                        <p class="subtitulo">
+                            Vendido: ${formatarDinheiro(item.valor)}
+                        </p>
+
+                    </div>
+                `;
+            }).join("");
+        }
+
+
+        // TABELA DE VENDAS
+
+        const tabela = document.getElementById("tabelaVendas");
+
+        if (pedidos.length === 0) {
+
+            tabela.innerHTML = `
+                <div class="sem-pedidos">
+                    <div>🧾</div>
+                    <p>Nenhuma venda registrada até o momento.</p>
+                </div>
+            `;
+
+            return;
+        }
+
+        const pedidosOrdenados = pedidos.slice().reverse();
+
+        tabela.innerHTML = `
+            <table class="tabela-relatorio">
+                <thead>
+                    <tr>
+                        <th>Pedido</th>
+                        <th>Data</th>
+                        <th>Cliente</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    ${pedidosOrdenados.map(pedido => `
+                        <tr>
+                            <td>#${escaparHTML(pedido.numero)}</td>
+                            <td>${escaparHTML(pedido.data || "-")}</td>
+                            <td>${escaparHTML(pedido.cliente?.nome || "Não informado")}</td>
+                            <td>${nomeStatus(pedido.status || "realizado")}</td>
+                            <td>${formatarDinheiro(pedido.total)}</td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>
+        `;
+    }
+
+
+    // ========================================
+    // NAVEGAÇÃO ENTRE SEÇÕES
+    // ========================================
 
     function mostrarSecao(secao, elemento) {
 
-        document.getElementById("dashboard").style.display = "none";
-        document.getElementById("pedidos").style.display = "none";
-        document.getElementById("produtos").style.display = "none";
-        document.getElementById("relatorios").style.display = "none";
+        ["dashboard", "pedidos", "produtos", "relatorios"].forEach(id => {
+            document.getElementById(id).style.display = "none";
+        });
 
         document.getElementById(secao).style.display = "block";
 
@@ -1183,8 +1953,8 @@
         const titulos = {
             dashboard: "Dashboard",
             pedidos: "Gerenciamento de pedidos",
-            produtos: "Produtos",
-            relatorios: "Relatórios"
+            produtos: "Gerenciador de produtos",
+            relatorios: "Relatórios da loja"
         };
 
         document.getElementById("tituloPagina").textContent =
@@ -1194,15 +1964,26 @@
             carregarPedidos();
         }
 
+        if (secao === "produtos") {
+            carregarProdutosAdmin();
+        }
+
+        if (secao === "relatorios") {
+            atualizarRelatorios();
+        }
     }
 
 
+    // ========================================
     // INICIALIZAÇÃO
+    // ========================================
 
     document.addEventListener("DOMContentLoaded", function() {
 
         atualizarDashboard();
         carregarPedidos();
+        carregarProdutosAdmin();
+        atualizarRelatorios();
 
     });
 
@@ -1210,4 +1991,3 @@
 
 </body>
 </html>
-```
