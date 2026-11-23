@@ -1143,3 +1143,128 @@ footer {
     margin: 10px 0 20px;
     text-align: center;
 }
+
+/* ========================================
+   NOVO VISUAL DO CABEÇALHO - RS STORE
+   COMPATÍVEL COM O HTML ORIGINAL
+======================================== */
+
+header {
+    background: #080808;
+    min-height: 90px;
+    padding: 18px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    border-bottom: 1px solid #252525;
+}
+
+/* LOGO */
+
+header .logo h1 {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: white;
+}
+
+header .logo h1::first-letter {
+    color: #008cff;
+}
+
+header .logo p {
+    color: #aaa;
+    font-size: 12px;
+}
+
+/* MENU */
+
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+header nav > a,
+header .menu-categorias > a {
+    color: #eee;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+header nav > a:hover,
+header .menu-categorias > a:hover {
+    color: #008cff;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+    header {
+        flex-direction: column;
+        padding: 22px 15px;
+        gap: 20px;
+    }
+
+    header nav {
+        flex-wrap: wrap;
+        gap: 18px 24px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 500px) {
+    header nav {
+        gap: 15px;
+    }
+
+    header nav > a,
+    header .menu-categorias > a {
+        font-size: 13px;
+    }
+}
+
+/* CORREÇÃO DOS LINKS DO CABEÇALHO ORIGINAL */
+
+body > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+body > header > a,
+body > header .menu-categorias > a {
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+body > header > a:hover,
+body > header .menu-categorias > a:hover {
+    color: #008cff !important;
+}
+
+body > header > .logo {
+    flex-shrink: 0;
+}
+
+body > header .menu-categorias {
+    position: relative;
+}
+
+body > header .submenu a {
+    color: white;
+    text-decoration: none;
+}
+
+body > header .submenu a:hover {
+    color: #008cff;
+}
