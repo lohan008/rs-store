@@ -12,7 +12,7 @@
 
     <style>
         .pagina-comprovante {
-            max-width: 850px;
+            max-width: 950px;
             margin: 40px auto;
             padding: 25px;
         }
@@ -60,34 +60,133 @@
             font-weight: bold;
         }
 
-        .etapas-pedido {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
+        /* =====================================
+           NOVO RASTREAMENTO DO PEDIDO
+        ===================================== */
+
+        .rastreamento-pedido {
             margin-top: 25px;
+            padding: 25px 15px;
+            background: #101820;
+            border: 1px solid #263b50;
+            border-radius: 12px;
+        }
+
+        .status-atual {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+
+        .status-atual strong {
+            display: block;
+            color: #168cff;
+            font-size: 20px;
+            margin-top: 8px;
+        }
+
+        .etapas-pedido {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            width: 100%;
         }
 
         .etapa-pedido {
-            flex: 1;
+            position: relative;
             text-align: center;
-            color: #888;
+            color: #777;
             font-size: 13px;
+            font-weight: 500;
+            padding: 0 5px;
         }
 
         .etapa-pedido span {
-            display: block;
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            margin: 0 auto 10px;
-            background: #087cff;
-            color: white;
+            margin: 0 auto 12px;
+            background: #252d36;
+            border: 2px solid #46515d;
+            color: #aaa;
+            font-size: 17px;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+            transition: 0.3s;
         }
 
-        .etapa-pedido.ativa {
+        /* Linha com seta entre as etapas */
+
+        .etapa-pedido::after {
+            content: "";
+            position: absolute;
+            top: 18px;
+            left: calc(50% + 20px);
+            width: calc(100% - 40px);
+            height: 3px;
+            background: #46515d;
+            z-index: 1;
+        }
+
+        .etapa-pedido:last-child::after {
+            display: none;
+        }
+
+        .etapa-pedido.conector-ativo::after {
+            background: #087cff;
+            box-shadow: 0 0 8px #087cff88;
+        }
+
+        .etapa-pedido.conector-ativo::before {
+            content: "";
+            position: absolute;
+            top: 14px;
+            right: -1px;
+            width: 9px;
+            height: 9px;
+            border-top: 3px solid #087cff;
+            border-right: 3px solid #087cff;
+            transform: rotate(45deg);
+            z-index: 2;
+        }
+
+        /* Etapas concluídas */
+
+        .etapa-pedido.concluida {
             color: #168cff;
             font-weight: bold;
+        }
+
+        .etapa-pedido.concluida span {
+            background: #087cff;
+            border-color: #168cff;
+            color: white;
+            box-shadow: 0 0 12px #087cff77;
+        }
+
+        /* Etapa atual */
+
+        .etapa-pedido.atual {
+            color: white;
+            font-weight: bold;
+        }
+
+        .etapa-pedido.atual span {
+            background: #168cff;
+            border: 3px solid white;
+            color: white;
+            box-shadow: 0 0 16px #087cff;
+            transform: scale(1.12);
+        }
+
+        /* Etapas futuras */
+
+        .etapa-pedido.pendente {
+            color: #777;
         }
 
         .botoes-comprovante {
@@ -109,38 +208,84 @@
             font-size: 15px;
         }
 
+        .botoes-comprovante a:hover,
+        .botoes-comprovante button:hover {
+            background: #0060cc;
+        }
+
         .sem-comprovante {
             text-align: center;
             padding: 40px 15px;
         }
 
+        /* =====================================
+           RESPONSIVIDADE
+        ===================================== */
+
         @media (max-width: 600px) {
+
             .pagina-comprovante {
                 padding: 12px;
+                margin: 20px auto;
             }
 
             .comprovante-box {
                 padding: 18px;
             }
 
+            .rastreamento-pedido {
+                padding: 20px 8px;
+            }
+
             .etapas-pedido {
-                flex-direction: column;
-                align-items: flex-start;
+                grid-template-columns: 1fr;
+                gap: 0;
             }
 
             .etapa-pedido {
                 display: flex;
                 align-items: center;
-                gap: 10px;
+                text-align: left;
+                gap: 15px;
+                min-height: 65px;
+                padding: 5px 10px;
             }
 
             .etapa-pedido span {
                 margin: 0;
                 flex-shrink: 0;
             }
+
+            .etapa-pedido::after {
+                top: 47px;
+                left: 27px;
+                width: 3px;
+                height: 25px;
+            }
+
+            .etapa-pedido.conector-ativo::before {
+                top: 61px;
+                left: 23px;
+                right: auto;
+                transform: rotate(135deg);
+            }
+
+            .etapa-pedido:last-child::after {
+                display: none;
+            }
+
+            .produto-comprovante {
+                flex-wrap: wrap;
+            }
+
         }
 
+        /* =====================================
+           IMPRESSÃO
+        ===================================== */
+
         @media print {
+
             header,
             .botoes-comprovante {
                 display: none !important;
@@ -163,6 +308,12 @@
             .total-comprovante {
                 color: #087cff !important;
             }
+
+            .rastreamento-pedido {
+                background: white !important;
+                border: 1px solid #999;
+            }
+
         }
     </style>
 </head>
@@ -206,6 +357,7 @@
 
                 area.innerHTML = `
                     <div class="sem-comprovante">
+
                         <h2>Nenhum comprovante encontrado</h2>
 
                         <p>
@@ -213,6 +365,7 @@
                         </p>
 
                         <a href="index.html">Voltar para a loja</a>
+
                     </div>
                 `;
 
@@ -228,15 +381,18 @@
 
             comprovante.produtos.forEach(function(produto) {
 
-                const quantidade = Number(produto.quantidade) || 1;
+                const quantidade =
+                    Number(produto.quantidade) || 1;
 
                 const subtotalProduto =
                     Number(produto.preco) * quantidade;
 
                 produtosHTML += `
+
                     <div class="produto-comprovante">
 
                         <span>
+
                             ${produto.nome} (x${quantidade})
 
                             <br>
@@ -244,6 +400,7 @@
                             <small>
                                 Tamanho: ${produto.tamanho || "Não informado"}
                             </small>
+
                         </span>
 
                         <strong>
@@ -251,6 +408,7 @@
                         </strong>
 
                     </div>
+
                 `;
 
             });
@@ -438,22 +596,32 @@
 
             etapas.forEach(function(etapa, indice) {
 
-                const classe = indice <= indiceAtual
-                    ? "ativa"
-                    : "";
+                let classe = "pendente";
 
-                const simbolo = indice < indiceAtual
+                if (indice < indiceAtual) {
+                    classe = "concluida";
+                }
+
+                if (indice === indiceAtual) {
+                    classe = "atual";
+                }
+
+                const simbolo = indice <= indiceAtual
                     ? "✓"
                     : indice + 1;
+
+                const conector = indice < indiceAtual
+                    ? "conector-ativo"
+                    : "";
 
 
                 etapasHTML += `
 
-                    <div class="etapa-pedido ${classe}">
+                    <div class="etapa-pedido ${classe} ${conector}">
 
                         <span>${simbolo}</span>
 
-                        ${etapa.nome}
+                        <strong>${etapa.nome}</strong>
 
                     </div>
 
@@ -464,14 +632,24 @@
 
             return `
 
-                <p>
-                    <strong>Status atual:</strong>
-                    ${etapas[indiceAtual].nome}
-                </p>
+                <div class="rastreamento-pedido">
 
-                <div class="etapas-pedido">
+                    <div class="status-atual">
 
-                    ${etapasHTML}
+                        Status atual:
+
+                        <strong>
+                            ${etapas[indiceAtual].nome}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="etapas-pedido">
+
+                        ${etapasHTML}
+
+                    </div>
 
                 </div>
 
