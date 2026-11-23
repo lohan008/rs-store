@@ -536,7 +536,7 @@ if (formLogin) {
 
         if (senha === "123") {
 
-            localStorage.setItem("usuarioLogado", usuario);
+            sessionStorage.setItem("usuarioLogado", usuario);
             window.location.href = "index.html";
 
         } else if (mensagem) {
@@ -556,7 +556,7 @@ const usuarioElemento = document.getElementById("usuarioLogado");
 
 if (usuarioElemento) {
 
-    const usuario = localStorage.getItem("usuarioLogado");
+    const usuario = sessionStorage.getItem("usuarioLogado");
 
     if (usuario) {
         usuarioElemento.textContent = "Olá, " + usuario + "!";
@@ -564,7 +564,7 @@ if (usuarioElemento) {
 }
 
 function sairDaConta() {
-    localStorage.removeItem("usuarioLogado");
+    sessionStorage.removeItem("usuarioLogado");
     window.location.href = "login.html";
 }
 
