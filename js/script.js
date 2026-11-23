@@ -269,6 +269,47 @@ function removerProduto(index) {
 
 }
 
+// ========================================
+// AUMENTAR QUANTIDADE
+// ========================================
+
+function aumentarQuantidade(index) {
+
+    if (!carrinho[index]) {
+        return;
+    }
+
+    carrinho[index].quantidade =
+        Number(carrinho[index].quantidade || 1) + 1;
+
+    salvarCarrinho();
+    mostrarCarrinho();
+
+}
+
+
+// ========================================
+// DIMINUIR QUANTIDADE
+// ========================================
+
+function diminuirQuantidade(index) {
+
+    if (!carrinho[index]) {
+        return;
+    }
+
+    if (Number(carrinho[index].quantidade || 1) <= 1) {
+        removerProduto(index);
+        return;
+    }
+
+    carrinho[index].quantidade =
+        Number(carrinho[index].quantidade) - 1;
+
+    salvarCarrinho();
+    mostrarCarrinho();
+
+}
 
 // ========================================
 // FINALIZAR COMPRA
